@@ -1,20 +1,26 @@
 # Loading data structured data 
+```
 unicar <- read.table("C:\\Users\\AFSS-Student\\Documents\\R\\Dataset\\car.data.csv",
                      sep = ",",header = T)
-#Examining the data
+```
+- Examining the data
+```
 class((unicar))  #class
 summary(unicar) #summary 
 dim(unicar)     #dimension 
-
-#Loading unstructured data
-##from the web
+```
+- Loading unstructured data
+```
+From the web
 d <- read.table(paste('http://archive.ics.uci.edu/ml/',
                       'machine-learning-databases/statlog/german/german.data',sep=''),
                 stringsAsFactors=F,header=F)
-##from the downloaded file 
+From the downloaded file 
 bank <- read.table("C:\\Users\\AFSS-Student\\Documents\\R\\Dataset\\Bank\\german.data-numeric",
                    sep="",header=F)
-## Setting column names
+```
+- Setting column names
+```
 colnames(d) <- c('Status.of.existing.checking.account',
                  'Duration.in.month', 'Credit.history', 'Purpose',
                  'Credit.amount', 'Savings account/bonds',
@@ -26,10 +32,14 @@ colnames(d) <- c('Status.of.existing.checking.account',
                  'Number.of.existing.credits.at.this.bank', 'Job',
                  'Number.of.people.being.liable.to.provide.maintenance.for',
                  'Telephone', 'foreign.worker', 'Good.Loan')
-##changing column element
+```
+- Changing column element
+```
 d$Good.Loan <- as.factor(ifelse(d$Good.Loan==1,'GoodLoan','BadLoan'))
 help(class(d))
-
+```
+- Mapping
+```
 mapping <- list('A11'='... < 0 DM',
                 'A12'='0 <= ... < 200 DM',
                 'A13'='... >= 200 DM / salary assignments for at least 1 year',
@@ -87,13 +97,19 @@ mapping <- list('A11'='... < 0 DM',
                 'A192'='yes, registered under the customers name',
                 'A201'='yes',
                 'A202'='no')
+- Applying the map element into the dataset 
 for(i in 1:(dim(d))[2]) {
   if(class(d[,i])=='character') {
     d[,i] <- as.factor(as.character(mapping[d[,i]]))
   }
 }
-  
+```
+- Investigating the dataframe
+```
 print(d[1:3,'Purpose'])
-summary(d$Purpose) 
-
+summary(d$Purpose)
+```
+- Creating table
+```
 table(d$Purpose,d$Good.Loan)
+```
