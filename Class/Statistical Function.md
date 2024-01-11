@@ -17,6 +17,9 @@ lm(x,y)                #Linear model
 aov(x)               #Analysis of variance
 glm(x)               #Generalized linear models (logit, Poisson models)
 library(survival) Survival package needed for survival models
+```
+# Others
+```
 class(x)            #what kind of object is it (high-level)?
 typeof(y)           # what is the object?s data type (low-level)?
 length(y)           #how long is it? What about two dimensional objects?
