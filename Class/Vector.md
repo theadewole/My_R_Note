@@ -71,6 +71,18 @@ seq(-5,10,along.with = df)
 seq_len(5)
 seq.int(-5,5)
 seq.int(2,10)
+```
+# Example with mean ()
+```
+COS.data<-read.csv("C:\\Users\\AFSS-Student\\Documents\\R\\Material From Dr\\Ending Jan 12 (Part 1) - Lecture 2 - Introduction to R\\CO2.csv",
+                   header = T)
+- mean of all row and column 1
+mean(COS.data[,1])
+- mean of column called year
+mean(COS.data$Year) 
+- finding the mean of all row for column 1 to 5 separately in a single code 
+data.test<-c(mean(COS.data[,1]),mean(COS.data[,2]),mean(COS.data[,3]),mean(COS.data[,4]),mean(COS.data[,5]))
+```
 
 
 
