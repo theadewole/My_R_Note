@@ -1,11 +1,22 @@
 # Vectors 
+- Vector is a collection of scalar in one dimension  i.e N by 1 or 1 by n
+- Vectors are one-dimensional arrays that can hold numeric data, character data, or logical data. In other words, a vector is a simple tool to store data
+#### Function c() 
+- The ‘c’ has to be lowercase
+- Numeric_vector<- c(1, 2, 3)
+- Character_vector<- c("a", "b", "c")
+- Booleaan_vector<- c(TRUE,FALSE,TRUE)
+##### name ()
+Used to assign name to element of a vector
+```
+ poker <- c(10,25,30)
+names(poker) <- c("paul", "Mike","steph")
+```
+# Referencing vector/scalar of positions to reference elements of a vector
 ```
 x <- c(4,7,2, 10.5,1,0)
 y <- c(1,2,3,9,8,7)
 z <- c("A","jan","Dec")
-```
-# Referencing vector/scalar of positions to reference elements of a vector
-```
 x[3]                 #referencing the 3rd element in a vector
 x[1:3]              #ref 1st to 3rd
 x[c(1,4,6)]         #ref the elements 1,4,6 of x
