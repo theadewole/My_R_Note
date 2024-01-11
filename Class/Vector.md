@@ -37,7 +37,40 @@ seq(y)    #Creating vector sequences
 rep(y)    #Creating vector sequences
 ```
 
+# Expanding on seq () 
+#### Syntax:  seq(from, to, by, length.out, along.with)
+Where, 
+- From = beginning number of the sequence.
+- To = Terminating the number of the sequence.
+- by = It is the increment of the given sequence. It is calculated as ((to-from) /(length.out-1)).
+- length.out = Decides the total length of the sequence
+- along.with = Outputs a sequence of the same length as the input vector.
 
+```
+- From 1 to 10
+seq(1,10)
+seq(from=1,to=10)
+- Decimal numbers
+seq(1.0,10.0) 
+- Negative numbers 
+seq(-1,-10)  
+- With by argument
+seq(from=1,to=10,by=2) 
+seq(1,10,2)
+seq(3,30,3) 
+# Determines the length of the sequence
+seq.int(from=3,to=30,length.out=10)   
+seq(-3,-30,length.out= 10)
+- Along with 
+y<-c(5,10,15,20)        
+seq(1,25,along.with = y)
+
+df<-c(-1,-5,-10,-2,-4)
+seq(-5,10,along.with = df)
+- Direct argument passing 
+seq_len(5)
+seq.int(-5,5)
+seq.int(2,10)
 
 
 
