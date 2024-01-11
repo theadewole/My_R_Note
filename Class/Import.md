@@ -30,3 +30,11 @@ bike <- read_excel("C:\\Users\\AFSS-Student\\Downloads\\Excel Project Dataset.xl
 library(haven)
 Dm <- read_sas("C:\\Users\\AFSS-Student\\Documents\\Internship Series\\03.QC of SDTM Datasets Development (Demography and Disposition)\\Work\\07Output\\dm.sas7bdat")
 ```
+
+# Read Table option for CSV and TXT file 
+```
+co2 <- read.table("C:\\Users\\AFSS-Student\\Documents\\R\\Material From Dr\\Ending Jan 12 (Part 1) - Lecture 2 - Introduction to R\\CO2.csv",
+           sep=',', header = T)
+bio <- read.table("C:\\Users\\AFSS-Student\\Documents\\DATA\\class.txt",
+                      sep=" ",header=F)
+```
