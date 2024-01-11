@@ -1,4 +1,5 @@
-# Loading data structured data 
+# Loading data and manipulation 
+- Loading Structured data
 ```
 unicar <- read.table("C:\\Users\\AFSS-Student\\Documents\\R\\Dataset\\car.data.csv",
                      sep = ",",header = T)
