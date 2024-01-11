@@ -1,6 +1,7 @@
-### Basic Commands 
+# Basic Commands 
+
+### print the current working directory - cwd
 ```
-print the current working directory - cwd
 getwd()
 ```
 ### Remove all objects in the current workspace
