@@ -62,13 +62,14 @@ roulette_selection_vector <- roulette_vector[c(2:5)]
 ```
 ## Selection by Logical operators
 The (logical) comparison operators known to R are:
-- < for less than
-- > for greater than
-- <= for less than or equal to
-- >= for greater than or equal to
-- == for equal to each other
-- != not equal to each other <br>
-e.g 6 > 5 returns TRUE <br>
+- for less than  <  
+- for greater than  > 
+* for less than or equal to  <=
+* for greater than or equal to  >=
+* for equal to each other  ==
+* not equal to each other  !=  <br>
+e.g <br>
+6 > 5 returns TRUE <br>
 c(4, 5, 6) > 5 <br>
 Returns [1] FALSE FALSE TRUE <br>
 ```
