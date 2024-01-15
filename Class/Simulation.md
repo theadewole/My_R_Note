@@ -26,3 +26,80 @@ set.seed(5)
 val<- runif(10,1,20)
 val
 ```
+## rpois (poisson)
+The Poisson distribution is a probability distribution that describes the number of events that occur within a fixed interval of time or space. It is often used when dealing with rare events that happen independently of each other. <br>
+It's important to note that the Poisson distribution is often used in situations where events are rare and occur independently, and the average rate of occurrence (λ) is known. <br>
+![Screenshot 2024-01-15 110827](https://github.com/theadewole/My_R_Note/assets/108795960/0f7b48a9-a620-413a-acf8-d8295d906257)
+<br>
+rpois(n,lambda) <br>
+* n: The number of random values to generate
+- lambda: Represents the average rate at which events occur in a Poisson distribution
+```
+~ Compute 5 random number at lambda of 5
+rpois(5,3)
+~ Compute 100 random number at lambda of 15 and plotting a scatter diagram 
+set.seed(1000)
+pat <- 100
+y<-rpois(pat,15)
+plot(y)
+```
+## rnorm ()
+function is used to generate n random values from a normal distribution with a specific mean and standard deviation.<br>
+rnorm(n,mean,sd)
+```
+rnorm(10,5,2)
+round(rnorm(10,3,4))
+~ with set.seed ()
+set.seed(5)
+n<-c(2000:2009)
+m<-round(rnorm(10,3,4),3)
+plot(m,n,"o",col="red",)
+```
+## rbinom()
+Function which randomly generates numbers which follow a binomial distribution <br>
+rbinom(n,size,prob)
+- size:sample size
+- prob=prob of success
+```
+rbinom(10,100,0.3)
+~ Application
+p <- round(runif(n=1000, min=1, max=1000),0)
+set.seed(200)
+rbinom(7,p,0.5)
+```
+## rgamma ()
+In R, the rgamma function is used to generate random numbers from a gamma distribution. The gamma distribution is a two-parameter family of continuous probability distributions <br>
+rgamma(n,shape,rate,scale) <br>
+- n: Number of random deviates to generate.
+- shape: The shape parameter of the gamma distribution.
+- rate: The rate parameter of the gamma distribution. If omitted, the default value is 1. <br>
+```
+rgamma(10,1,1)
+rgamma(val,1,1)
+~ Application
+x_dgamma <- seq(0, 2, by = 0.04)    
+y_dgamma <- dgamma(x_dgamma, shape = 6)  
+plot(y_dgamma) 
+```
+specify 'rate' or 'scale' but not both <br>
+## rbeta()
+In R, the rbeta function is used to generate random numbers from a beta distribution. The beta distribution is a continuous probability distribution defined on the interval [0, 1] <br>
+rbeta(n,shape1,shape2,ncp) 
+* n: Number of random deviates to generate.
+* shape1: The first shape parameter of the beta distribution. It must be a positive number.
+* shape2: The second shape parameter of the beta distribution. It must be a positive number. <br>
+Here's a brief explanation of the parameters: <br>
+Shape parameter 1 (shape1): This parameter determines the shape of the beta distribution. It must be a positive number.<br>
+Shape parameter 2 (shape2): This parameter is the second shape parameter of the beta distribution. It must be a positive number. <br>
+- Note <br>
+the ncp parameter is not directly applicable. The ncp parameter stands for "non-centrality parameter," and it is commonly used in the context of distributions that have both a null hypothesis (central) and an alternative hypothesis (non-central). However, the beta distribution itself does not have a concept of a non-centrality parameter.
+```
+rbeta(10,2,4)
+~ Application
+set.seed(13579)
+N <- 10000  
+y_rbeta <- rbeta(N, shape1 = 1, shape2 = 5)   
+y_rbeta
+plot(density(y_rbeta), 
+     main = "beta Distribution in R")
+```
