@@ -121,7 +121,7 @@ The replicate() function in R is used to replicate the execution of an expressio
 replicate(n, expr, simplify = "array") <br>
 * n: The number of replications, i.e., how many times to repeat the expression.
 * expr: The expression to be replicated.
-* simplify: A logical or character string specifying whether to simplify the result.
+* simplify: A logical or character string specifying whether to simplify the result.<br>
 n: This is an integer specifying the number of times to replicate the expression. For example, if you want to run a simulation 100 times, you would set n = 100.<br>
 expr: This is the expression to be replicated. It can be any valid R expression or function call. For instance, if you want to replicate the sampling of 10 random numbers from a normal distribution, your expression might be rnorm(10).<br>
 simplify: This parameter controls whether the result should be simplified. The default is "array," which means that the result is simplified to an array if possible. Other possible values include "vector" and FALSE to prevent simplification <br>
