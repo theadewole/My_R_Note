@@ -103,3 +103,16 @@ y_rbeta
 plot(density(y_rbeta), 
      main = "beta Distribution in R")
 ```
+##### Excercise
+```
+~ Generate 100 numbers ~ N(0, 1)
+rnorm(100,0,1)
+~ Generate 50 numbers ~ N(10, 5)
+rbeta(50,10,5)
+~ Generate 1000 numbers ~ Poisson(50)
+rpois(1000,50)
+~ Generate 10 numbers ~ Beta(0.1, 0.1)
+rbeta(10,0.1,0.1
+~ Generate 30 numbers ~ Uniform(0, 10)
+runif(30,0,10)
+```
