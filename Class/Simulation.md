@@ -116,3 +116,37 @@ rbeta(10,0.1,0.1
 ~ Generate 30 numbers ~ Uniform(0, 10)
 runif(30,0,10)
 ```
+## replicate ()
+The replicate() function in R is used to replicate the execution of an expression multiple times. It simplifies the process of running the same code multiple times and collecting the results. <br>
+replicate(n, expr, simplify = "array") <br>
+* n: The number of replications, i.e., how many times to repeat the expression.
+* expr: The expression to be replicated.
+* simplify: A logical or character string specifying whether to simplify the result.
+n: This is an integer specifying the number of times to replicate the expression. For example, if you want to run a simulation 100 times, you would set n = 100.<br>
+expr: This is the expression to be replicated. It can be any valid R expression or function call. For instance, if you want to replicate the sampling of 10 random numbers from a normal distribution, your expression might be rnorm(10).<br>
+simplify: This parameter controls whether the result should be simplified. The default is "array," which means that the result is simplified to an array if possible. Other possible values include "vector" and FALSE to prevent simplification <br>
+
+```
+replicate(n=10, 3)
+replicate(n=7, 'A')
+~ generate 3 values that follow normal distribution (replicate this 4 times)
+set.seed(2)
+replicate(n=4, rnorm(3, mean=0, sd=1))
+~ generate 3 values that follow normal distribution (replicate this 6 times)
+set.seed(78)
+replicate(n=6, rnorm(3, mean=0, sd=1))
+~ Using replicate() to Simulate Data create 5 samples each of size n=10
+set.seed(1)
+data <- replicate(n=5, rnorm(10, mean=0, sd=1))
+colMeans(data)
+~ replicate with plot
+replicate(10, mean(rnorm(100)))
+qplot(replicate(100, mean(rnorm(10))),
+        type="histogram")
+
+~ 100 x mean of 10 N(0,1)
+qplot(replicate(100,mean(rnorm(0,1))))
+~ 1000 x mean of 10 Unif(0, 10)
+~ 1000 x mean of 100 Unif(0, 10)
+~ 100 x mean of 1000 Unif(0, 10)
+```
