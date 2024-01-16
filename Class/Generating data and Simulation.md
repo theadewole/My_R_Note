@@ -208,7 +208,7 @@ qplot(replicate(1000,mean(rnorm(10))),type="histogram")
 qplot(replicate(10000,mean(rnorm(10))),type="histogram")
 ```
 
-## Simulation:
+## Simulation
 This procedure is known as DRY "Do not repeat yourself" <br>
 Using the user-defined function to automate the process such that values are just supplied to populate the plot for the above exercise
 ```
