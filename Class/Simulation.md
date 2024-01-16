@@ -143,10 +143,15 @@ colMeans(data)
 replicate(10, mean(rnorm(100)))
 qplot(replicate(100, mean(rnorm(10))),
         type="histogram")
-
+```
+#### Excercise
+```
 ~ 100 x mean of 10 N(0,1)
-qplot(replicate(100,mean(rnorm(0,1))))
+qplot(replicate(100,mean(rnorm(10))),type="histogram")
 ~ 1000 x mean of 10 Unif(0, 10)
+qplot(replicate(10,mean(rnorm(10))),type="histogram")
 ~ 1000 x mean of 100 Unif(0, 10)
-~ 100 x mean of 1000 Unif(0, 10)
+qplot(replicate(1000,mean(rnorm(10))),type="histogram")
+~ 10000 x mean of 1000 Unif(0, 10)
+qplot(replicate(10000,mean(rnorm(10))),type="histogram")
 ```
