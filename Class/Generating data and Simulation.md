@@ -1,3 +1,55 @@
+# Fixed Levels and Sequences
+## rep () function
+Function is used to replicate or repeat elements of a vector <br>
+rep(x, times) <br>
+- x: is the vector or element to be repeated.
+- times/each: is the number of times to repeat each element
+```
+rep(c("m","F"),times=10)
+factor(rep(c("m","F"),each=10))
+```
+## gl () function
+Function is used to generate factors by specifying the pattern of levels in the factor <br>
+- gl(n, k, labels = NULL, length = n * k, ordered = FALSE) <br>
+- n is the number of levels.
+- k is the number of times each level should be repeated.
+- labels is an optional argument specifying labels for the levels.
+- length is an optional argument specifying the length of the resulting factor.
+- ordered is an optional logical argument indicating whether the resulting factor <br>
+```
+gl(n=2,k=10,labels = c("M","F"))
+gl(n=2,k=10,labels = c("M","F"),length = 3*10,ordered = FALSE)
+```
+###### expand.grid () 
+Function is used to create a data frame from all combinations of the given vectors or factors<br>
+expand.grid(...)
+```
+~ Create vectors for factors
+colors <- c("Red", "Green", "Blue")
+sizes <- c("Small", "Medium", "Large")
+shapes <- c("Circle", "Square")
+combinations <- expand.grid(Color = colors, Size = sizes, Shape = shapes)
+________________________________________________________________________________________
+x1 <- c("abc","cde","def") 
+x2 <- c(1,2,3,4,6) 
+x3 <- c("M","F") 
+expand.grid(x1, x2, x3)
+__________________________________________________________________________________________
+Demographics<-expand.grid(gender=c("M","F"), 
+            			  education=c("HS","College","Advanced"), 
+            			  class=c("Freshman","Sophomore","Junior","Senior"))
+Demographics
+```
+## seq()
+Function is used to generate sequences of numbers. It is a versatile function that can create sequences of integers, floating-point numbers, or even sequences with specific increments <br>
+seq(from, to, by, length.out, along.with) <br>
+- from: The starting value of the sequence.
+- to: The end value of the sequence.
+- by: The increment between values in the sequence.
+- length.out: The desired length of the sequence. If both from and to are specified, this argument determines the number of points in the sequence.
+- along.with: A vector, and the result will have the same length as this argument. This is an alternative way to specify the length of the sequence.
+
+# Generating Random Numbers
 ## Runif Function 
 You can use the runif() function to generate random values from a uniform distribution in R. <br>
 runif(n, min=0, max=1). <br>
