@@ -155,3 +155,15 @@ qplot(replicate(1000,mean(rnorm(10))),type="histogram")
 ~ 10000 x mean of 1000 Unif(0, 10)
 qplot(replicate(10000,mean(rnorm(10))),type="histogram")
 ```
+
+## Simulation:
+This procedure is known as DRY "Do not repeat yourself" <br>
+Using the user-defined function to automate the process such that values are just supplied to populate the plot for the above exercise
+```
+simulation <-function(rp,nrm){
+  y <- replicate(rp,mean(rnorm(nrm)))
+               qplot(y,type="histogram")
+              
+}
+simulation(1000,10)
+```
