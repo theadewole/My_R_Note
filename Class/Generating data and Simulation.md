@@ -110,8 +110,9 @@ plot(m,n,"o",col="red",)
 ## rbinom()
 Function which randomly generates numbers which follow a binomial distribution <br>
 rbinom(n,size,prob)
-- size:sample size
-- prob=prob of success
+- n: Number of random values to generate.
+- size: Number of trials in each experiment.
+-  prob: Probability of success in each trial.
 ```
 rbinom(10,100,0.3)
 ~ Application
