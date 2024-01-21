@@ -24,20 +24,13 @@ t.test(x, y,
 - x, y <br>
 x: a numeric vector of data values for a one-sample or paired t-test. <br>
 y: a numeric vector of data values for a two-sample t-test. <br>
-- alternative <br>
-Specifies the alternative hypothesis. It can take values "two.sided" (default), "less" for a one-sided test less than the null hypothesis, or "greater" for a one-sided test greater than the null hypothesis. <br>
-- mu <br>
-The hypothesized population mean for a one-sample t-test. <br>
-- paired <br>
-Logical indicating whether you are performing a paired t-test (TRUE) or not (FALSE). If TRUE, you should provide two vectors, x and y. <br>
-- var.equal
-Logical indicating whether to assume equal variances in the two samples for a two-sample t-test. Default is FALSE. <br>
-- conf.level <br>
-Confidence level for the confidence interval. Default is 0.95. <br>
-- na.action <br>
-A function that indicates what should happen if missing values are encountered. The default is na.fail, which stops the function if missing values are present. <br>
-- paired <br>
-Logical indicating whether to perform a paired t-test. Default is FALSE. <br>
+- alternative: Specifies the alternative hypothesis. It can take values "two.sided" (default), "less" for a one-sided test less than the null hypothesis, or "greater" for a one-sided test greater than the null hypothesis. <br>
+- mu: The hypothesized population mean for a one-sample t-test. <br>
+- paired: Logical indicating whether you are performing a paired t-test (TRUE) or not (FALSE). If TRUE, you should provide two vectors, x and y. <br>
+- var.equal: Logical indicating whether to assume equal variances in the two samples for a two-sample t-test. Default is FALSE. <br>
+- conf.level: Confidence level for the confidence interval. Default is 0.95. <br>
+- na.action: A function that indicates what should happen if missing values are encountered. The default is na.fail, which stops the function if missing values are present. <br>
+- paired: Logical indicating whether to perform a paired t-test. Default is FALSE. <br>
 ## One Sample T – Test Approach
 The One-Sample T-Test is used to test the statistical difference between a sample mean and a known or assumed/hypothesized value of the mean in the population
 ```
