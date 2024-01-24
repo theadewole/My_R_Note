@@ -38,3 +38,9 @@ co2 <- read.table("C:\\Users\\AFSS-Student\\Documents\\R\\Material From Dr\\Endi
 bio <- read.table("C:\\Users\\AFSS-Student\\Documents\\DATA\\class.txt",
                       sep=" ",header=F)
 ```
+# Reading rdata
+```
+load("exampleData.rData")
+~ the above method is useful when the location of the rdata is in the working drive
+load("C:\\Users\\AFSS-Student\\Documents\\R\\Dataset\\exampleData.rData")
+```
