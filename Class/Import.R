@@ -41,5 +41,6 @@ bio <- read.table("C:\\Users\\AFSS-Student\\Documents\\DATA\\class.txt",
 # Loading an rdata
 ################################################################################
 load("exampleData.rData")
-# the above method is useful when the location of the rdata is in the working drive
+# the above method is usfel whwn the location of the rdata is in the working drive
 load("C:\\Users\\AFSS-Student\\Documents\\R\\Dataset\\exampleData.rData")
+
