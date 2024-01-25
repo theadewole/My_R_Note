@@ -1,4 +1,4 @@
-The cut() function in R can be used to cut a range of values into bins and specify labels for each bin.
+The cut() function in R can be used to cut a range of values into bins and specify labels for each bin. <br>
             ```cut(x, breaks, labels = NULL, …)``` <br>
 - x: Name of vector
 - breaks: Number of breaks to make or vector of break points
