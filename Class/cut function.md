@@ -28,4 +28,16 @@ df$category <- cut(df$points,
                    breaks=c(0, 10, 15, 20, 40),
                    labels=c('Bad', 'OK', 'Good', 'Great'))
 ```
+## with include.lowest
+The include.lowest parameter is used in the context of binning or creating intervals in R, specifically in functions like cut() or hist(). 
+It is a logical argument that determines whether the lower bound of the intervals should be inclusive or exclusive.
+- When include.lowest = TRUE, it means that the intervals include the lowest value of the data. In other words, if an interval is specified as [a, b), the interval includes a.
+- When include.lowest = FALSE, it means that the intervals are exclusive on the lower end. Using the same example, if an interval is specified as (a, b), the interval does not include a.
 
+```
+data <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+~ Cut the data into intervals
+intervals <- cut(data, breaks = c(1, 5, 10), include.lowest = TRUE)
+~ Display the result
+print(intervals)
+```
