@@ -88,8 +88,47 @@ custdata <- merge(custdata, medianincome,
 summary(custdata[c("state.of.res", "income", "Median.Income.x")])
 #Normalize  income by  Median.Income
 custdata$income.norm <- with(custdata, income/Median.Income.x)
-
 summary(custdata$income.norm)
+
+custdata$income.lt.20K <- custdata$income < 20000
+summary(custdata$income.lt.20K)
+###################################
+#Select the age ranges of interest. 
+#The upper and lower bounds should encompass the full range of the data
+##################################
+brks <- c(0, 25, 65, Inf)
+
+#################################
+#Cut the data into age ranges. The include.lowest=T argument makes sure that zero age data is
+#included in the lowest age range category. By default it would be excluded
+################################
+custdata$age.range <- cut(custdata$age,
+                          breaks=brks, include.lowest=T)
+#The output of cut() is a factor variable
+summary(custdata$age.range)
+
+#NORMALIZATION AND RESCALING
+#Centering on mean age
+summary(custdata$age)
+meanage <- mean(custdata$age)
+custdata$age.normalized <- custdata$age/meanage
+summary(custdata$age.normalized)
+
+#Summarizing age
+summary(custdata$age)
+# Take the mean 
+meanage <- mean(custdata$age)
+# Take the Sd
+stdage <- sd(custdata$age)
+########################################
+#Use the mean value as the origin (or reference point) and rescale 
+#the distance from the mean by the standard deviation
+########################################
+custdata$age.normalized <- (custdata$age-meanage)/stdage
+  
+summary(custdata$age.normalized)
+
+
 
 
 
