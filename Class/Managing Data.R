@@ -125,10 +125,62 @@ stdage <- sd(custdata$age)
 #the distance from the mean by the standard deviation
 ########################################
 custdata$age.normalized <- (custdata$age-meanage)/stdage
-  
+
 summary(custdata$age.normalized)
 
+###############################
+signedlog10 <- function(x) {
+  ifelse(abs(x) <= 1, 0, sign(x)*log10(abs(x)))
+}
+
+signedlog10(10)
+
+###########################
+
+
+#Creating a sample group column
+##########################
+#Splitting into test and training using a random group mark Splitting into test 
+#and training using a random group mark
+##########################
+
+##########################
+#dim(custdata) returns the number of rows  and columns of the data frame as a vector, 
+ #so dim(custdata)[1] returns the number of rows.
+############################
+custdata$gp <- runif(dim(custdata)[1])
+
+#########################
+#Here we generate a test set of about
+#10% of the data (93 customers—a little over 9%, actually) and train on the remaining 90%.
+########################
+testSet <- subset(custdata, custdata$gp <= 0.1)
+
+########################
+#Here we generate a training using the remaining data
+#######################
+trainingSet <- subset(custdata, custdata$gp > 0.1)
+
+dim(testSet)[1]
+dim(trainingSet)[1]
+
+#Ensuring test/train split doesn’t split inside a household
+#####################
+#Get all unique household IDs from your data frame
+####################
+hh <- unique(hhdata$household_id)
+
+#########################
+#Create a temporary data frame of household IDs and a uniformly random number from 0 to 1
+#########################
+households <- data.frame(household_id = hh, gp = runif(length(hh)))
+
+########################
+#Merge new random sample group column back into original data frame
+########################
+hhdata <- merge(hhdata, households, by="household_id")
 
 
 
 
+                  
