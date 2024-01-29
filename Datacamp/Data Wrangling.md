@@ -1,4 +1,4 @@
-## Loading the gapminder and dplyr packages
+# Loading the gapminder and dplyr packages
 Before you can work with the gapminder dataset, you'll need to load two R packages that contain the tools for working with it, then display the gapminder dataset so that you can see what it contains.
 
 To your right, you'll see two windows inside which you can enter code: The script.R window, and the R Console. All of your code to solve each exercise must go inside script.R.
@@ -99,3 +99,78 @@ filter(year==2007)%>%
 mutate(lifeExpMonths=12*lifeExp)%>%
 arrange(desc(lifeExpMonths))
 ```
+# Data Visualization 
+## ggplot
+Before creating a plot, you need to load your data into R and possibly perform some data wrangling. Make sure your data is in a format suitable for the plot you want to create.
+Basic syntax <br>
+```ggplot(data = your_data_frame, mapping = aes(x = x_variable, y = y_variable))``` <br>
+- data: The data frame containing your data.
+- mapping: The aesthetic mapping, specifying which variables represent the x and y axes.
+#### Geometric Objects (Geoms):
+Geoms are the graphical representations of the data points in your plot. Common geoms include points, lines, bars, and more. 
+You add them to your plot using the + operator <br>
+``` ggplot(data = your_data_frame, mapping = aes(x = x_variable, y = y_variable))+geom_point()```
+#### Aesthetics (aes)
+define how variables in your data are mapped to visual properties. In the aes() function, you specify which variables correspond to the x-axis (x), y-axis (y), color (color), size (size), shape (shape), and more <br>
+```ggplot(data = your_data_frame, mapping = aes(x = x_variable, y = y_variable, color = category_variable)) + geom_point()``` 
+#### Faceting
+Faceting allows you to create multiple plots based on the levels of a categorical variable. You can use facet_grid() or facet_wrap(). <br>
+``` ggplot(data = your_data_frame, mapping = aes(x = x_variable, y = y_variable)) + geom_point() + facet_wrap(~category_variable) ```
+#### Themes and Labels:
+You can customize the appearance of your plot using themes and add labels to axes, titles, and more <br>
+```ggplot(data = your_data_frame, mapping = aes(x = x_variable, y = y_variable)) + geom_point() + labs(title = "My Plot Title", x = "X-axis Label", y = "Y-axis Label") + theme_minimal()```
+
+```
+~ Load the ggplot2 package as well
+library(ggplot2)
+~ Create gapminder_1952
+gapminder_1952 <- gapminder %>%
+  filter(year==1952)
+~ Change to put pop on the x-axis and gdpPercap on the y-axis
+ggplot(gapminder_1952, aes(x = pop, y = gdpPercap)) +
+  geom_point()
+~ Create a scatter plot with pop on the x-axis and lifeExp on the y-axis
+ggplot(gapminder_1952,aes(x=pop,y=lifeExp)) +
+  geom_point()
+```
+## Log scale
+scale - that is, a scale where each fixed distance represents a multiplication of the value. This is what the scatter plot looks like when x is on a log scale. To apppy this you add + after the geom plot of choice <br>
+```scale_x_log10()``` for xaxis <br>
+```scale_y_log10()``` for yaxis
+## Additional Aesthetic
+Used to add additional details to the plot and legend to the plot
+- The color aesthetic
+```....aes(x=,y=,color=)```
+- Size aesthetic
+```....aes(x=,y=,size=)```
+
+```
+~ Scatter plot comparing pop and lifeExp, with color representing continent
+ggplot(gapminder_1952,aes(x=pop,y=lifeExp,color=continent))+
+  geom_point()+
+  scale_x_log10()
+~ Add the size aesthetic to represent a country's gdpPercap
+ggplot(gapminder_1952, aes(x = pop, y = lifeExp, 
+  color = continent, size=gdpPercap)) +
+    geom_point() +
+scale_x_log10()
+```
+## Faceting 
+It helps to divide our plot into sub plots <br>
+```.....+geom_point()+facet_wrap(~)```
+```
+~ Scatter plot comparing pop and lifeExp, faceted by continent
+ggplot(gapminder_1952,aes(x=pop,y=lifeExp))+
+  geom_point()+
+  scale_x_log10()+
+  facet_wrap(~continent)
+~ Scatter plot comparing gdpPercap and lifeExp, with color representing continent and size representing population, faceted by year
+ggplot(gapminder,aes(x=gdpPercap,y=lifeExp,
+  color=continent,color=pop))+
+  geom_point()+
+  scale_x_log10()+
+  facet_wrap(~year)
+```
+
+
+
