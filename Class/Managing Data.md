@@ -15,19 +15,26 @@ summary(custdata[c("housing.type","recent.move","num.vehicles","is.employed")])
 ```
 ### Missing Data in categorical variable (Character)
 ```
-custdata$is.employed.fix <- ifelse(is.na(custdata$is.employed),             >- If is.employed value is missing
-      "missing",                                                             >-..assign the value "missing". Otherwise..
-         ifelse(custdata$is.employed==T,                                  >- ...if is.employed==TRUE, assign the value "employed"...
+custdata$is.employed.fix <- ifelse(is.na(custdata$is.employed),     >- If is.employed value is missing
+      "missing",                                                    >-..assign the value "missing". Otherwise..
+         ifelse(custdata$is.employed==T,                            >- ...if is.employed==TRUE, assign the value "employed"...
              "employed",
-                   "not employed"))                                        >-..or the value "not employed"
+                   "not employed"))                                 >-..or the value "not employed"
 
-~ The transformation has turned the variable type from factor to string. You can change it back with the as.factor() function
+~ The transformation has turned the variable type from factor to string.
+             You can change it back with the as.factor() function
 summary(as.factor(custdata$is.employed.fix))
 ```
-#Remapping NA to a level as "not in active workforce"
+##### Remapping NA to a level as "not in active workforce"
+```
 custdata$is.employed.fix <- ifelse(is.na(custdata$is.employed),
                                    "not in active workforce",
                                    ifelse(custdata$is.employed==T,
                                           "employed",
                                           "not employed"))
-# In the above the corrected column was assigned to a new location so as not to alter the dataset
+```
+In the above, the corrected column was assigned to a new column (employed.fix) so as not to alter the dataset
+
+### Missing Values in Numeric data
+Suppose your income variable is missing substantial data
+
