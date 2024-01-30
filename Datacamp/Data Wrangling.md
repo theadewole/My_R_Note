@@ -172,5 +172,112 @@ ggplot(gapminder,aes(x=gdpPercap,y=lifeExp,
   facet_wrap(~year)
 ```
 
+# Grouping and Summarization
+## Summarization
+Summarizing will always give one output <br>
+can be used to evaluate average (mean), median, min, max <br>
+```
+~ Summarize to find the median life expectancy
+gapminder %>%
+  summarize(medianLifeExp=median(lifeExp))
+~ Filter for 1957 then summarize the median life expectancy
+gapminder %>%
+filter(year==1957)%>%
+summarize(medianLifeExp=median(lifeExp))
+~Filter for 1957 then summarize the median life expectancy and the maximum GDP per capita
+~ Filter for 1957 then summarize the median life expectancy
+gapminder %>%
+filter(year==1957)%>%
+summarize(medianLifeExp=median(lifeExp),maxGdpPercap=max(gdpPercap))
+```
+## Group_by 
+Used to group one or more variable 
+```
+~ Find median life expectancy and maximum GDP per capita in each year
+gapminder %>%
+group_by(year)%>%
+summarize(medianLifeExp=median(lifeExp),maxGdpPercap=max(gdpPercap))
+~ Find median life expectancy and maximum GDP per capita in each continent in 1957
+gapminder %>%
+filter(year==1957)%>%
+group_by(continent)%>%
+summarize(medianLifeExp=median(lifeExp),maxGdpPercap=max(gdpPercap))
+~ Find median life expectancy and maximum GDP per capita in each continent/year combination
+gapminder %>%
+  group_by(year,continent)%>%
+  summarize(medianLifeExp=median(lifeExp),maxGdpPercap=max(gdpPercap))
+```
+## Visualizing summarized data
+Note: graphs don't usually start at zero, we add + expant_limit(y=0) or x=0 after geom_point() to better make meaning of our visuals
+```
+by_year <- gapminder %>%
+  group_by(year) %>%
+  summarize(medianLifeExp = median(lifeExp),
+            maxGdpPercap = max(gdpPercap))
+~ Create a scatter plot showing the change in medianLifeExp over time
+ggplot(by_year,aes(x=year,y=medianLifeExp))+
+geom_point()+
+expand_limits(y=0)
+~ Plot the change in medianGdpPercap in each continent over time
+ggplot(by_year_continent,aes(y=medianGdpPercap,x=year,color=continent))+
+geom_point()+
+ facet_wrap(~continent)+
+expand_limits(y = 0)
 
+~ Summarize the median GDP and median life expectancy per continent in 2007
+by_continent_2007 <- gapminder%>%
+filter(year==2007)%>%
+group_by(continent)%>%
+summarize(medianLifeExp=median(lifeExp),
+medianGdpPercap=median(gdpPercap))
+~Use a scatter plot to compare the median GDP and median life expectancy
+ggplot(by_continent_2007,aes(x=medianGdpPercap,
+y=medianLifeExp,color=continent))+
+geom_point()
+```
+# Types of visualizations
+- Box plots, which compare the distribution of a numeric variable among several categories.
+## Line plot
+Line plots, which are useful for showing change over time.
+```
+~ Summarize the median gdpPercap by year, then save it as by_year
+by_year <- gapminder %>%
+  group_by(year)%>%
+  summarize(medianGdpPercap=median(gdpPercap))
+~ Create a line plot showing the change in medianGdpPercap over time
+ggplot(by_year,aes(y=medianGdpPercap,x=year))+
+geom_line()+
+expand_limits(y = 0)
 
+~ Summarize the median gdpPercap by year & continent, save as by_year_continent
+by_year_continent <- gapminder %>%
+  group_by(year,continent)%>%
+  summarize(medianGdpPercap=median(gdpPercap))
+~ Create a line plot showing the change in medianGdpPercap by continent over time
+ggplot(by_year_continent,aes(y=medianGdpPercap,x=year,color=continent))+
+geom_line()+
+expand_limits(y = 0)
+```
+## Bar Plot
+Bar plots, which are good at comparing statistics for each of several categories.<br>
+for aes x is the categorical variable why y determines the height of the bar <br>
+Bar plot always starts at zero 
+```
+~ Summarize the median gdpPercap by continent in 1952
+by_continent <- gapminder %>%
+filter(year==1952)%>%
+  group_by(continent)%>%
+  summarize(medianGdpPercap=median(gdpPercap))
+~ Create a bar plot showing medianGdp by continent
+ggplot(by_continent,aes(x=continent,y=medianGdpPercap))+
+geom_col()
+
+~ Filter for observations in the Oceania continent in 1952
+oceania_1952 <- gapminder %>%
+  filter(continent=="Oceania",year==1952)
+~ Create a bar plot of gdpPercap by country
+ggplot(oceania_1952,aes(x=country,y=gdpPercap))+
+  geom_col()
+```
+## Histogram 
+Histograms, which describe the distribution of a one-dimensional numeric variable.
