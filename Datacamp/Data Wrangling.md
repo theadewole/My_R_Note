@@ -236,7 +236,6 @@ y=medianLifeExp,color=continent))+
 geom_point()
 ```
 # Types of visualizations
-- Box plots, which compare the distribution of a numeric variable among several categories.
 ## Line plot
 Line plots, which are useful for showing change over time.
 ```
@@ -281,3 +280,37 @@ ggplot(oceania_1952,aes(x=country,y=gdpPercap))+
 ```
 ## Histogram 
 Histograms, which describe the distribution of a one-dimensional numeric variable.
+- It has only one aesthetic: the x-axis, the variable whose distribution you are examining
+- Width is chosen automatically and has a large effect on how the histogram communicates the distribution by editing the geom_point(bins=)
+```
+gapminder_1952 <- gapminder %>%
+  filter(year == 1952) %>%
+  mutate(pop_by_mil = pop / 1000000)
+~ Create a histogram of population (pop_by_mil)
+ggplot(gapminder_1952,aes(x=pop_by_mil))+
+geom_histogram(bins=50)
+
+~ Create a histogram of population (pop), with x on a log scale
+ggplot(gapminder_1952,aes(x=pop))+
+geom_histogram()+
+scale_x_log10()
+```
+## Box Plot 
+Box plots, which compare the distribution of a numeric variable among several categories.
+- it has two aesthetics- x is the category, and y is the values that we're comparing
+- The top and bottom of each box represent the 75th percentile and the 25th percentile of that group, meaning half of the distribution lies within that box.
+- The lines going up and down from the box, called "whiskers"\
+```
+gapminder_1952 <- gapminder %>%
+  filter(year == 1952)
+~ Create a boxplot comparing gdpPercap among continents
+ggplot(gapminder_1952,aes(x=continent,y=gdpPercap))+
+geom_boxplot()+
+scale_y_log10()
+
+~ Add a title to this graph: "Comparing GDP per capita across continents"
+ggplot(gapminder_1952, aes(x = continent, y = gdpPercap)) +
+  geom_boxplot() +
+  scale_y_log10()+
+  ggtitle("Comparing GDP per capita across continents")
+```
