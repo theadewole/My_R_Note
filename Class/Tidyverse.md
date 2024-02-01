@@ -217,3 +217,67 @@ babynames %>%
   ggplot()+
   geom_line(mapping = aes(year,prop))
 ```
+
+## Deriving information
+### summarise() 
+summarise variables. Deriving information
+
+```
+babynames %>% summarise(total = sum(n), max = max(n))
+
+~ The first (minimum) year in the dataset
+~ The last (maximum) year in the dataset
+~ The total number of children represented in the data
+babynames %>% summarise(first=min(year),
+        last=max(year),
+        total=sum(n))
+
+~ Extract the rows where name == "Khaleesi". Then use  summarise() and a summary functions to find: 
+ The total number of children named Khaleesi 
+ The first year Khaleesi appeared in the data ~
+babynames %>% 
+  filter(name=="Khaleesi") %>% 
+  summarise(total=sum(n),first_year=min(year))
+```
+***n(): The number of rows in a dataset/group***
+***n_distinct(): The number of distinct values in a variable***
+```
+babynames %>% summarise(n = n())
+babynames %>% summarise(n = n(), nname = n_distinct(name))
+~ showing total obs,country and continent in the dataset 
+gapminder %>% summarise(obs=n(),country=n_distinct(country),
+                        continent=n_distinct(continent))
+```
+
+### Grouping cases
+Groups cases by common values of one or more columns
+```
+babynames %>% 
+  group_by(sex)
+~ group_by and summarise
+babynames %>% 
+  group_by(sex) %>%
+  summarise(total = sum(n))
+
+~ Use group_by(), summarise(), and arrange() to display the ten most popular names. 
+Compute popularity as the total number of children of a single gender given a name ~
+babynames %>% group_by(name,sex) %>%
+  summarise(total=sum(n)) %>% 
+  arrange(desc(total))
+
+~ Use grouping to calculate and then plot the number of children born each year over time.
+babynames %>% 
+  group_by(year) %>% 
+  summarise(n_children=sum(n)) %>% 
+  ggplot()+
+  geom_line(mapping = aes(x=year, y= n_children))
+```
+***ungroup()*** <br>
+Removes grouping criteria from a data frame
+```
+babynames %>%
+  group_by(name, sex) %>% 
+  ungroup() %>%
+  summarise(total = sum(n)) %>% 
+  arrange(desc(total))
+```
