@@ -49,3 +49,35 @@ counties_selected %>%
 ~ Sort in descending order of private_work
   arrange(desc(private_work))
 ```
+###  The mutate() verb
+We can use the mutate() verb to add new variables or change existing variables.
+- Specifying dot-keep equals "none" means that any column not included in mutate() is discarded (...., .keep="none"), and at such the mutate function works as a select statement
+```
+counties_selected <- counties %>%
+  select(state, county, population, public_work)
+
+~ Add a new column public_workers with the number of people employed in public work
+counties_selected %>%
+mutate(public_workers=public_work*population/100)%>%
+~ Sort in descending order of the public_workers column
+  arrange(desc(public_workers))
+
+~ Select the columns state, county, population, men, and women
+counties_selected <- counties %>%
+  select(state, county, population, men,women)
+
+~ Calculate proportion_women as the fraction of the population made up of women
+counties_selected %>%
+  mutate(proportion_women=women/population)
+```
+***Using the .keep=none with the mutate function***
+```
+counties %>%
+~ Keep state, county and add proportion_men
+  mutate(state, county,population,proportion_men=men/population,.keep="none")%>%
+~ Filter for population of at least 10,000
+  filter(population>=10000)%>%
+~ Arrange proportion of men in descending order 
+  arrange(desc(proportion_men))
+```
+# Aggregating Data
