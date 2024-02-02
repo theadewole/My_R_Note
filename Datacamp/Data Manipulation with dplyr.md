@@ -257,3 +257,77 @@ The new column name goes on the left, and the old column name goes on the right.
 ****Renaming from select statement**** <br>
 this is done after the original name on the dataset is called with the select statement and an = sign is placed in front to apply  the new name e.g unemployment=unemployement_rate
 *The difference between select and rename. In select we need to name all the columns you want to keep along with renaming one or more of them. With rename, we can just pick one column whose name you want to change*
+
+```
+-Use count() to determine how many counties are in each state
+counties %>%
+~ Count the number of counties in each state
+    count(state)
+-Notice the n column in the output; use rename() to rename that to num_counties
+%>% from above
+~ Rename the n column to num_counties
+  rename(num_counties=n)
+
+~ Select the columns state, county, and poverty from the counties dataset; in the same step, rename the poverty column to poverty_rate
+
+counties %>%
+  select(state, county,poverty_rate=poverty)
+```
+
+### The relocate verb
+The relocate verb is used to change column positions using a quick and efficient syntax
+- ****Relocating to .before**** <br>
+To specify the column we wish to move as the first argument
+-  *****Relocating to .after**** <br>
+relocate also has a dot-after argument for specifying that a column should be moved to after another column
+#### relocate() + select helpers
+We can also combine relocate with the select helpers
+```
+- Move the density column to the end of the tibble.
+- Move the population column to before the land_area column.
+
+counties_selected %>%
+  ~ Move the density column to the end
+  relocate(density,.after=last_col())%>%
+  ~ Move the population column to before land_area
+  relocate(population,.before=land_area)
+
+~ Change the name of the unemployment column
+counties %>%
+  rename(unemployment_rate = unemployment)
+
+~ Keep the state and county columns, and the columns containing poverty
+counties %>%
+  select(state, county, contains("poverty"))
+
+~ Calculate the fraction_women column without dropping the other columns
+counties %>%
+  mutate(fraction_women = women / population)
+
+~ Move the region column to before state
+counties %>%
+relocate(region, .before = state)
+```
+
+# Babyname Dataset Exploration
+### Filter for multiple
+To apply filter for multiple observation within a column use %in% and pass the conditions
+```
+babynames %>%
+  ~ Filter for the year 1990
+  filter(year==1990)%>%
+  ~ Sort the number column in descending order 
+  arrange(desc(number))
+
+~ Find the most common name in each year
+  group_by(year)%>%
+  slice_max(number,n=1)
+
+~ Filter for the names Steven, Thomas, and Matthew 
+selected_names <- babynames %>%
+  filter(name %in% c("Steven", "Thomas", "Matthew"))
+  ~ Plot the names using a different color for each name
+ggplot(selected_names, aes(x =year , y = number, color =name)) +
+  geom_line()
+
+```
