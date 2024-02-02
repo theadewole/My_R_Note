@@ -228,7 +228,9 @@ which grabs the last column
 which selects columns that have a specified pattern.
 ```
 - Use glimpse() to examine all the variables in the counties table.
-- Select the columns for state, county, population, and (using a colon) all five of those industry-related variables; there are five consecutive variables in the table related to the industry of people's work: professional, service, office, construction, and production.
+- Select the columns for state, county, population, and (using a colon) all five of those
+industry-related variables; there are five consecutive variables in the table related to the
+industry of people's work: professional, service, office, construction, and production.
 - Arrange the table in descending order of service to find which counties have the highest rates of working in the service industry.
 
 ~ Glimpse the counties table
@@ -251,6 +253,7 @@ filter(public_work >=50)
 ### The rename verb
 rename () is used to rename the variable to a desired name. <br>
 The new column name goes on the left, and the old column name goes on the right. <br>
-****Renaming from select statement****
+<br>
+****Renaming from select statement**** <br>
 this is done after the original name on the dataset is called with the select statement and an = sign is placed in front to apply  the new name e.g unemployment=unemployement_rate
 *The difference between select and rename. In select we need to name all the columns you want to keep along with renaming one or more of them. With rename, we can just pick one column whose name you want to change*
