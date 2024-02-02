@@ -40,30 +40,30 @@ select(babynames,n)
 ```starts_with(prefix, ignore.case = FALSE, vars = tidyselect::all_of(names(.)))```
 - prefix: A character string representing the prefix of the column names to be selected.
 - ignore.case: A logical value indicating whether the matching should be case-insensitive (default is FALSE).
-- vars: Variables to consider. By default, it considers all variables in the data frame.
+- vars: Variables to consider. By default, it considers all variables in the data frame. <br>
 ```select(team,starts_with("W"))```
 ##### ends_with() - Selecting columns that end with…
 ```end_with(prefix, ignore.case = FALSE, vars = tidyselect::all_of(names(.)))```
 - prefix: A character string representing the prefix of the column names to be selected.
 - ignore.case: A logical value indicating whether the matching should be case-insensitive (default is FALSE).
-- vars: Variables to consider. By default, it considers all variables in the data frame.
+- vars: Variables to consider. By default, it considers all variables in the data frame. <br>
 ```select(team,ends_with("D"))```
 ##### contains() - Selecting columns whose names contain
 ```contains(substring, ignore.case = FALSE, vars = tidyselect::all_of(names(.)))```
 - substring: A character string representing the substring to look for in the column names.
 - ignore.case: A logical value indicating whether the matching should be case-insensitive (default is FALSE).
-- vars: Variables to consider. By default, it considers all variables in the data frame.
+- vars: Variables to consider. By default, it considers all variables in the data frame. <br>
 ```select(team,contains("A"))```
 ##### matches() - Selecting columns whose names match regular expression
 ```matches(regular_expression, ignore.case = FALSE, vars = tidyselect::all_of(names(.)))```
 - regular_expression: A character string representing the regular expression pattern to match against the column names.
 - ignore.case: A logical value indicating whether the matching should be case-insensitive (default is FALSE).
-- vars: Variables to consider. By default, it considers all variables in the data frame.
+- vars: Variables to consider. By default, it considers all variables in the data frame. <br>
 ```select(team,matches("ID"))```
 ##### one_of() - Selecting columns whose names are one of a set
 ```one_of(..., vars = tidyselect::all_of(names(.)))```
 - ...: A set of character vectors representing the column names to match.
-- vars: Variables to consider. By default, it considers all variables in the data frame.
+- vars: Variables to consider. By default, it considers all variables in the data frame.<br>
 ```select(team,one_of("AB","G"))```
 ##### num_range() - Selecting columns named in prefix, number style
 ```num_range(prefix, range, width = NULL, vars = tidyselect::all_of(names(.)))```
