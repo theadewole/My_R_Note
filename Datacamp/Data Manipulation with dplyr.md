@@ -331,3 +331,108 @@ ggplot(selected_names, aes(x =year , y = number, color =name)) +
   geom_line()
 
 ```
+
+### Group mutate 
+The group_by is applied first after which the argument is passed to a mutate to create a new variable based on the grouping variable (s)
+- *****ungroup**** <br>
+is applied after a group_by to remove the grouping condition for further usage of the dataset for other manipulation
+
+```
+- First, calculate the total number of people born in that year in this dataset as year_total.
+- Next, use year_total to calculate the fraction of people born in each year that have each name.
+
+~ Calculate the fraction of people born each year with the same name
+babynames %>%
+  group_by(year) %>%
+  mutate(year_total=sum(number)) %>%
+  ungroup() %>%
+  mutate(fraction = number/year_total)
+
+- Now use your newly calculated fraction column, in combination with slice_max(), to identify the year each name was most common.
+%>% from  above
+  ~ Find the year each name is most common
+ group_by(name) %>%
+  slice_max(fraction, n = 1)
+
+Use a grouped mutate to add two columns:
+- name_total: the sum of the number of babies born with that name in the entire dataset.
+- name_max: the maximum number of babies born with that name in any year.
+
+babynames %>%
+  ~ Add columns name_total and name_max for each name
+  group_by(name)%>%
+  mutate(name_total=sum(number), name_max=max(number))
+
+- Add another step to ungroup the table.
+- Add a column called fraction_max containing the number in the year divided by name_max.
+%>% from above
+ ~ Ungroup the table 
+ungroup%>%
+  ~ Add the fraction_max column containing the number by the name maximum 
+ mutate(fraction_max=number/name_max)
+
+
+- Filter the names_normalized table to limit it to the three names Steven, Thomas, and Matthew.
+- Create a line plot from names_filtered to visualize fraction_max over time, colored by name
+
+names_normalized <- babynames %>%
+                     group_by(name) %>%
+                     mutate(name_total = sum(number),
+                            name_max = max(number)) %>%
+                     ungroup() %>%
+                     mutate(fraction_max = number / name_max)
+
+names_filtered <- names_normalized %>%
+  ~ Filter for the names Steven, Thomas, and Matthew
+ filter(name %in% c("Steven","Thomas","Matthew"))
+
+~ Visualize the names in names_filtered over time
+ggplot(names_filtered,aes(x=year,y=fraction_max,color=name))+
+geom_line()
+````
+
+### Window functions
+The window function. A window function takes a vector, and returns another vector of the same length.
+##### lag ()
+ A window function takes a vector, and returns another vector of the same length
+```
+v <- c(1,3,6,14)
+lag(v)
+output NA 1 3 6
+```
+Now the first item is NA, meaning it's missing, but it's followed by 1, 3, and 6: the item just prior to it in the original vector.
+
+#### Comparing consecutive steps 
+By lining up each item in the vector with the item directly before it, we can compare consecutive steps and calculate the changes
+```
+v-lag(v)
+output
+NA  2  3  8
+```
+
+```
+babynames_fraction %>%
+  ~ Arrange the data in order of name, then year 
+arrange(name,year) %>%
+  ~ Group the data by name
+group_by(name)%>%
+  ~ Add a ratio column that contains the ratio of fractions between each year 
+ mutate(ratio=fraction/lag(fraction))
+
+
+babynames_ratios_filtered <- babynames_fraction %>%
+                     arrange(name, year) %>%
+                     group_by(name) %>%
+                     mutate(ratio = fraction / lag(fraction)) %>%
+                     filter(fraction >= 0.00001)
+babynames_ratios_filtered %>%
+  ~ Extract the largest ratio from each name 
+  slice_max(ratio,n=1)%>%
+  ~ Sort the ratio column in descending order 
+  arrange(desc(ratio))%>%
+  ~ Filter for fractions greater than or equal to 0.001
+  filter(fraction>=0.001)
+```
+
+
+
