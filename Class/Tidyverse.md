@@ -281,3 +281,37 @@ babynames %>%
   summarise(total = sum(n)) %>% 
   arrange(desc(total))
 ```
+
+### Mutate
+The mutate() function in the dplyr package in R is used to create new variables or modify existing ones in a data frame. The basic syntax for mutate() <br>
+```mutate(.data, new_variable = expression, ...)``` <br>
+- data: The data frame to be modified.
+- new_variable: The name of the new variable to be created or an existing variable to be modified.
+- expression: The operation or calculation to perform on the variable.
+```
+babynames %>%
+  mutate(percent = round(prop*100, 2))
+
+babynames %>%
+  mutate(percent = round(prop*100, 2), nper = round(percent))
+```
+****mini_rank()**** <br>
+min_rank() function is used to calculate the ranks of values within a variable, returning the rank as a numeric vector. 
+It assigns the smallest rank to the smallest element, and ties are handled by assigning the minimum rank to all tied values. <br>
+```min_rank(x, ties.method = c("average", "first", "last", "random"))```
+- x: The variable for which you want to calculate the ranks.
+- ties.method: A character string specifying how ties should be handled. Options include "average" (default), "first" (ties get the minimum rank), "last" (ties get the maximum rank), and "random" (ties get a random rank)
+```
+min_rank(c(50,100,1000))
+min_rank(desc(c(50, 100, 1000)))
+library(dplyr)
+
+~  Create a data frame
+df <- data.frame(
+  ID = c(1, 2, 3, 4),
+  Value = c(10, 15, 10, 20)
+)
+
+~ Use min_rank() to calculate the ranks of 'Value'
+df <- mutate(df, Rank = min_rank(Value))
+```
