@@ -74,15 +74,17 @@ filter(babynames,is.na(n))
 filter(babynames, name == "Garrett", year == 1880)
 
 ###################################
-#Filter with boolean operator
+#Filter with logical and 
+  #boolean operator
 ##################################
-#With hand operator 
+
+#With 'and' operator 
 filter(babynames, name == "Garrett" & year == 1880)
 
 #Girls named Sea
 filter(babynames,name=="Sea",sex=="F")
 
-#Names that were used by exactly 5 or 6 children in 1880
+#Names that were used by exactly 5 'or' 6 children in 1880
 filter(babynames,n==5 | n==6 ,year==1880)
 
 #Names that are one of Acura, Lexus, or Yugo
@@ -216,4 +218,104 @@ babynames %>%
   summarise(total = sum(n)) %>% 
   arrange(desc(total))
 
+
+
+##############################
+#             Mutate         #
+##############################
+babynames %>%
+  mutate(percent = round(prop*100, 2))
+
+babynames %>%
+  mutate(percent = round(prop*100, 2), nper = round(percent))
+
+#min_rank
+min_rank(c(50,100,1000))
+
+min_rank(desc(c(50, 100, 1000)))
+
+# Create a data frame
+df <- data.frame(
+  ID = c(1, 2, 3, 4),
+  Value = c(10, 15, 10, 20)
+)
+
+# Use min_rank() to calculate the ranks of 'Value'
+df <- mutate(df, Rank = min_rank(Value))
+
+##############################
+#      Joining Dataset       #
+##############################
+install.packages("nycflights13")
+library(nycflights13)
+View(flights)
+View(airlines)
+
+band <- tribble(
+  ~name,     ~band,
+  "Mick",  "Stones",
+  "John", "Beatles",
+  "Paul", "Beatles"
+)
+
+instrument <- tribble(
+  ~name,   ~plays,
+  "John", "guitar",
+  "Paul",   "bass",
+  "Keith", "guitar"
+)
+
+instrument2 <- tribble(
+  ~artist,   ~plays,
+  "John", "guitar",
+  "Paul",   "bass",
+  "Keith", "guitar"
+)
+
+# left join
+band %>% left_join(instrument, by = "name")
+
+# right join
+band %>% right_join(instrument, by = "name")
+
+# full join 
+band %>% full_join(instrument, by = "name")
+
+# inner join
+band %>% inner_join(instrument, by = "name")
+
+
+#Which airlines had the largest arrival delays? Work in groups to complete the code below
+library(tidyverse)
+flights %>% 
+  drop_na(arr_delay) %>%
+  left_join(airlines, by = "carrier") %>%
+  group_by(name) %>%
+  summarise(delay = mean(arr_delay)) %>%
+  arrange(delay)
+
+#Use a named vector to match on variables with different names.
+band %>% left_join(instrument2, by = c("name" = "artist"))
+airports %>% left_join(flights, by = c("faa" = "dest"))
+
+airports %>% select(1:3)
+flights %>% select(14:15)
+
+#Filtering Joins
+#semi Join: is a type of join operation that returns only the rows from the left data frame 
+ #(or table) where there is a match with the right data frame based on a specified condition.
+band %>% semi_join(instrument, by = "name")
+
+#Anti Join:is a type of join operation that returns only the rows from the left data 
+ #frame (or table) where there is no match with the right data frame based on a specified condition
+band %>% anti_join(instrument, by = "name")
+
+#How many airports in airports are serviced by flights 
+    ## originating in New York (i.e. flights in our dataset?)
+airports %>%
+  semi_join(flights, by = c("faa" = "dest")) %>%
+  distinct(faa)
+
+# distinct(): Removes rows with duplicate values (in a column)
+distinct(babynames,name)
 
