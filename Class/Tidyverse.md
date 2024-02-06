@@ -1,4 +1,4 @@
-![Screenshot 2024-02-06 104200_5](https://github.com/theadewole/My_R_Note/assets/108795960/ea46339a-c989-4024-aa04-dde8e4541835)![Screenshot 2024-02-06 103253](https://github.com/theadewole/My_R_Note/assets/108795960/7fafb891-40cc-45c5-aa82-c60c73c6819a)A collection of modern R packages that share common  philosophies, embed best practices, and are designed to work together <br>
+A collection of modern R packages that share common  philosophies, embed best practices, and are designed to work together <br>
 ``` install.packages("tidyverse")``` <br>
 ```library("tidyverse")``` <br>
 The above R package that serves as a short cut for installing and loading the components of the tidyverse
@@ -387,7 +387,7 @@ airports %>% select(1:3)
 flights %>% select(14:15)
 ```
 ### Filtering Joins
-****semi Join****
+****semi Join**** <br>
 is a type of join operation that returns only the rows from the left data frame  (or table) where there is a match with the right data frame based on a specified condition. <br>
 ![Screenshot 2024-02-06 104200_4](https://github.com/theadewole/My_R_Note/assets/108795960/08e079e4-f50b-4409-9c5a-7537fb0b5782) <br>
 ```band %>% semi_join(instrument, by = "name")`` <br>
