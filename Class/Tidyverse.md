@@ -1,4 +1,4 @@
-A collection of modern R packages that share common  philosophies, embed best practices, and are designed to work together <br>
+![Screenshot 2024-02-06 104200_5](https://github.com/theadewole/My_R_Note/assets/108795960/ea46339a-c989-4024-aa04-dde8e4541835)![Screenshot 2024-02-06 103253](https://github.com/theadewole/My_R_Note/assets/108795960/7fafb891-40cc-45c5-aa82-c60c73c6819a)A collection of modern R packages that share common  philosophies, embed best practices, and are designed to work together <br>
 ``` install.packages("tidyverse")``` <br>
 ```library("tidyverse")``` <br>
 The above R package that serves as a short cut for installing and loading the components of the tidyverse
@@ -315,3 +315,102 @@ df <- data.frame(
 ~ Use min_rank() to calculate the ranks of 'Value'
 df <- mutate(df, Rank = min_rank(Value))
 ```
+## Joining Dataset 
+Each join function returns a data frame / tibble. <br>
+```left_join(x, y, by = NULL, … )``` <br>
+- x and y: data frames to join
+- null: names of columns to join on <br>
+
+****Working dataset****
+```
+install.packages("nycflights13")
+library(nycflights13)
+View(flights)
+View(airlines)
+
+band <- tribble(
+  ~name,     ~band,
+  "Mick",  "Stones",
+  "John", "Beatles",
+  "Paul", "Beatles"
+)
+
+instrument <- tribble(
+  ~name,   ~plays,
+  "John", "guitar",
+  "Paul",   "bass",
+  "Keith", "guitar"
+)
+
+instrument2 <- tribble(
+  ~artist,   ~plays,
+  "John", "guitar",
+  "Paul",   "bass",
+  "Keith", "guitar"
+)
+
+```
+### Mutating Joins
+****left join**** <br>
+![Screenshot 2024-02-06 104200](https://github.com/theadewole/My_R_Note/assets/108795960/a2713c69-528c-45d1-aa62-42ee75a64e94) <br>
+```band %>% left_join(instrument, by = "name")``` <bfr>
+
+****right join**** <br>
+![Screenshot 2024-02-06 104200_1](https://github.com/theadewole/My_R_Note/assets/108795960/a943097c-b635-418a-ad38-c5808cc3b44c) <br>
+```band %>% right_join(instrument, by = "name")``` <br>
+
+****full join**** <br>
+
+```band %>% full_join(instrument, by = "name")``` <br>
+![Screenshot 2024-02-06 104200_2](https://github.com/theadewole/My_R_Note/assets/108795960/10f79899-16f1-4174-8ca6-790ab8e9819e) <br>
+****inner join**** <br>
+![Screenshot 2024-02-06 104200_3](https://github.com/theadewole/My_R_Note/assets/108795960/f49377db-4740-4869-ae4a-43c342ead643) <br>
+```band %>% inner_join(instrument, by = "name")``` <br>
+
+```
+  ~ Which airlines had the largest arrival delays? Work in groups to complete the code below
+library(tidyverse)
+flights %>% 
+  drop_na(arr_delay) %>%
+  left_join(airlines, by = "carrier") %>%
+  group_by(name) %>%
+  summarise(delay = mean(arr_delay)) %>%
+  arrange(delay)
+```
+#### Use a named vector to match variables with different names.
+This is most useful in situations where  'merging columns' in the different datasets have different names 
+```
+band %>% left_join(instrument2, by = c("name" = "artist"))
+airports %>% left_join(flights, by = c("faa" = "dest"))
+*********************************************************
+airports %>% select(1:3)
+flights %>% select(14:15)
+```
+### Filtering Joins
+****semi Join****
+is a type of join operation that returns only the rows from the left data frame  (or table) where there is a match with the right data frame based on a specified condition. <br>
+![Screenshot 2024-02-06 104200_4](https://github.com/theadewole/My_R_Note/assets/108795960/08e079e4-f50b-4409-9c5a-7537fb0b5782) <br>
+```band %>% semi_join(instrument, by = "name")`` <br>
+
+****Anti Join**** <br>
+is a type of join operation that returns only the rows from the left data  frame (or table) where there is no match with the right data frame based on a specified condition <br>
+![Screenshot 2024-02-06 104200_5](https://github.com/theadewole/My_R_Note/assets/108795960/6d5595f4-490b-490f-a183-24f0237e97c0) <br>
+```band %>% anti_join(instrument, by = "name")``` <br>
+
+****distinct()**** <br>
+Removes rows with duplicate values (in a column) <br>
+```distinct(babynames,name)``` <br>
+
+```
+  ~ How many airports in airports are serviced by flights originating in New York (i.e. flights in our dataset?)
+airports %>%
+  semi_join(flights, by = c("faa" = "dest")) %>%
+  distinct(faa)
+```
+
+
+
+
+
+
+
