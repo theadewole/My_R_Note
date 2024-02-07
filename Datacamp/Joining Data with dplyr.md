@@ -114,5 +114,11 @@ filter(is.na(version))
 ```
 ## The right_join verb
 keyword returns all records from the right table and the matching records from the left table <br>
-The replace_na(list()) is used to assign another variable to na for specific column(s)
+****The replace_na(list()) is used to assign another variable to na for specific column(s)**** <br>
+```replace_na(list(n=0))``` <br>
+The above replaces the na in the 'n' variable with 0
+```
+
+```
+
 
