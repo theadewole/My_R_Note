@@ -137,8 +137,7 @@ parts %>%
 
 ## Joining tables to themselves
 This is more useful when a table has a relationship to itself (hierarchical table).
-![image](https://github.com/theadewole/My_R_Note/assets/108795960/d9d9eb96-3206-49df-8dc3-68057bfb5cd0) <br>
-
+ ![Screenshot 2024-02-08 152843](https://github.com/theadewole/My_R_Note/assets/108795960/1eb15144-2968-45d7-984e-31ada4a1d5c0) <br>
 ****inner joining a table to itself****
 ```
 - Inner join themes to their own children, resulting in the suffixes "_parent" and "_child", respectively.
