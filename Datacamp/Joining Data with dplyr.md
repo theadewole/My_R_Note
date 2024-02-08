@@ -19,6 +19,7 @@ set %>%
 inner_join(theme,by=c("theme_id"=Id"),
 suffix=c("_set","_theme")
 ```
+
 ```
   ~ Add the correct verb, table, and joining column
 parts %>% 
@@ -174,6 +175,8 @@ themes %>%
 ```
 
 # Full, Semi, and Anti Joins
+## The full_join verb
+Returns all cases in either dataset
 
 
 
