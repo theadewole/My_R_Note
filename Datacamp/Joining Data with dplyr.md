@@ -118,7 +118,61 @@ keyword returns all records from the right table and the matching records from t
 ```replace_na(list(n=0))``` <br>
 The above replaces the na in the 'n' variable with 0
 ```
+- Use the count verb to count each part_cat_id in the parts table.
+- Use a right_join to join part_categories. You'll need to use the part_cat_id from the count and the id column from part_categories.
 
+parts %>%
+    ~ Count the part_cat_id
+  count(part_cat_id) %>%
+   ~ Right join part_categories
+   ~ right_join(part_categories,by=c("id"="part_cat_id"))
+  right_join(part_categories, by = c("part_cat_id" = "id"))
+    ~ Filter for NA
+%>% from above 
+  filter(is.na(n))
+    ~ after the 2nd right_join %>%
+ # Use replace_na to replace missing values in the n column
+  replace_na(list(n=0))
 ```
 
+## Joining tables to themselves
+This is more useful when a table has a relationship to itself (hierarchical table).
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/d9d9eb96-3206-49df-8dc3-68057bfb5cd0) <br>
+
+****inner joining a table to itself****
+```
+- Inner join themes to their own children, resulting in the suffixes "_parent" and "_child", respectively.
+- Filter this table to find the children of the "Harry Potter" theme.
+
+themes %>% 
+  ~ Inner join the themes table
+ inner_join(themes,by=c("id"="parent_id"),
+ suffix=c("_parent","_child")) %>%
+  ~ Filter for the "Harry Potter" parent name 
+  filter(name_parent=="Harry Potter")
+```
+```
+- Use another inner join to combine themes again with itself.
+   Be sure to use the suffixes "_parent" and "_grandchild" so the columns in the resulting table are clear.
+- Update the by argument to specify the correct columns to join on. If you're unsure of what columns to join on, it might help to look at the result of the first join to get a feel for it.
+
+themes %>% 
+  inner_join(themes, by = c("id" = "parent_id"), suffix = c("_parent", "_child")) %>%
+  inner_join(themes,by=c("id_child"="parent_id"),
+  suffix=c("_parent","_grandchild"))
+```
+****Left joining a table to itself****
+```
+- Left join the themes table to its own children, with the suffixes _parent and _child respectively.
+- Filter the result of the join to find themes that have no children.
+
+themes %>% 
+  ~ Left join the themes table to its own children
+ left_join(themes,by=c("id"="parent_id"),
+ suffix=c("_parent","_child")) %>%
+  ~ Filter for themes that have no child themes
+  filter(is.na(name_child))
+```
+
+# Full, Semi, and Anti Joins
 
