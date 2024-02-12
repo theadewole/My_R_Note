@@ -348,3 +348,83 @@ questions_with_tags %>%
 tags %>%
   anti_join(question_tags,by=c("id"="tag_id"))
 ```
+
+```
+- Use an inner join to combine the questions and answers tables using the suffixes "_question" and "_answer", respectively.
+- Subtract creation_date_question from creation_date_answer within the as.integer() function to create the gap column.
+
+questions %>%
+ inner_join(answers,by=c("id"="question_id"),suffix=c("_question","_answer")) %>%
+  mutate(gap = as.integer(creation_date_question -
+  creation_date_answer))
+
+- Count and sort the question_id column in the answers table to create the answer_counts table.
+- Join the questions table with the answer_counts table and include all observations from the questions table.
+- Replace the NA values in the n column with 0s.
+
+answer_counts <- answers %>%
+count(question_id,sort=T)
+
+questions %>%
+  full_join(answer_counts,by=c("id"="question_id")) %>%
+replace_na(list(n=0))
+
+- Combine the question_tags table with question_answer_counts using an inner_join.
+- Now, use another inner_join to add the tags table.
+
+question_answer_counts %>%
+ inner_join(question_tags,by=c("id"="question_id")) %>%
+  inner_join(tags, by = c("tag_id" = "id"))
+
+- Aggregate the tagged_answers table by tag_name.
+- Summarize tagged_answers to get the count of questions and the average_answers.
+- Sort the resulting questions column in descending order.
+
+tagged_answers %>%
+ group_by(tag_name) %>%
+  summarize(questions =n(),
+            average_answers =mean(n)) %>%
+ arrange(desc(questions))
+```
+****To bind together two data frames by their rows**** <br>
+``bind_rows(df1, df2, df3, ...)``` <br>
+****To bind_cols() function from dplyr to bind together two data frames by their columns**** <br>
+```bind_cols(df1, df2, df3, ...)``` <br>
+## Extracting date using the lubridate library year () function
+The year () function which takes a date and turns it into the relevant year.
+
+```
+- Use two inner joins to combine the question_tags and tags tables with the questions table.
+- Now, use two inner joins to combine the question_tags and tags tables with the answers table.
+
+questions %>%
+  inner_join(question_tags, by = c("id" = "question_id")) %>%
+  inner_join(tags, by = c("tag_id" = "id"))
+
+answers %>%
+  inner_join(question_tags, by = "question_id") %>%
+  inner_join(tags, by = c("tag_id" = "id"))
+
+- Combine the questions_with_tags and answers_with_tags tables into posts_with_tags.
+- Add a year column to the posts_with_tags table, then count posts by type, year, and tag_name.
+
+posts_with_tags <- bind_rows(questions_with_tags %>% mutate(type = "question"),
+answers_with_tags %>% mutate(type = "answer"))
+
+posts_with_tags %>%
+  mutate(year = year(creation_date)) %>%
+  count(type, year, tag_name)
+```
+
+```
+Filter the by_type_year_tag table for the dplyr and ggplot2 tags.
+Create a line plot with that filtered table that plots the frequency (n) over time, colored by question/answer and faceted by tag.
+
+by_type_year_tag_filtered <- by_type_year_tag %>%
+  filter(tag_name %in% c("dplyr","ggplot2"))
+
+ggplot(by_type_year_tag_filtered, aes(year, n, color = type)) +
+  geom_line() +
+  facet_wrap(~ tag_name)
+```
+``
