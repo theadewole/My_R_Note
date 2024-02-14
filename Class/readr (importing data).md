@@ -70,3 +70,15 @@ Used to convert . to  na in a tribble <br>
 - col_time() time
 
 ```nimbus <- read_csv("nimbus.csv", na = "."), col_types = list(ozone = col_double()))```
+# Writing 
+- write_csv() Comma separated values
+- write_excel_csv() CSV intended for opening in Excel
+- write_delim() General delimited files
+- write_file() Single string, written as is
+- write_lines() Vector of strings, one element per line
+- write_tsv() Tab delimited values <br>
+****Outputting a csv file**** <br>
+```write_csv(nimbus, file = "nimbus2.csv")```
+```
+write_csv(nimbusII,file="nimbus2.csv")
+```
