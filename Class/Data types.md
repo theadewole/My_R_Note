@@ -250,6 +250,10 @@ gss_cat %>%
 ```
 
 # Date Time 
+To check the current date <br>
+```current_date <- Sys.Date()``` <br>
+To check current time <br>
+```current_time <- Sys.time()```
 ```
 flights %>% select(c(1, 2, 3, 17, 18, 5, 19))
 
@@ -257,3 +261,4 @@ flights %>%
   ggplot(mapping = aes(x = sched_dep_time, y = arr_delay)) + 
   geom_point(alpha = 0.2) + geom_smooth()
 ```
+
