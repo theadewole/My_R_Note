@@ -254,6 +254,7 @@ To check the current date <br>
 ```current_date <- Sys.Date()``` <br>
 To check current time <br>
 ```current_time <- Sys.time()```
+
 ```
 flights %>% select(c(1, 2, 3, 17, 18, 5, 19))
 
@@ -261,4 +262,76 @@ flights %>%
   ggplot(mapping = aes(x = sched_dep_time, y = arr_delay)) + 
   geom_point(alpha = 0.2) + geom_smooth()
 ```
+## hms ()
+Is a function used to create a time object representing hours, minutes, and seconds. It is part of the hms package, which provides tools for working with time-of-day data.
+```
+library(hms)
+hms(seconds = 56, min = 34, hour = 12)
+hms(56,34,12)
+hms(h=56,m=23,s=30)
 
+What is the best time of day to fly? 
+Use the hour and minute variables in flights to compute the time of day for each flight as an hms.
+Then use a smooth line to plot the relationship between time of day and arr_delay.
+flights %>% 
+  mutate(time = hms(hour = hour, minute = minute)) %>% 
+  ggplot(aes(time, arr_delay)) + 
+  geom_point(alpha = 0.2) + geom_smooth()
+```
+## lubridate
+It provides functions to parse, manipulate, and do arithmetic with dates and times. <br>
+Here are some key features and functions provided by lubridate:
+- Parsing dates and times: ymd(), mdy(), dmy(), ymd_hms(), etc. These functions parse character vectors into Date or POSIXct objects.
+- Accessing components: Functions like year(), month(), day(), hour(), minute(), and second() allow you to extract specific components of dates and times.
+- Manipulating dates and times: ymd() + months(3) would add 3 months to a date, for example.
+- Time zone handling: with_tz() and force_tz() functions help with managing time zones.
+- Interval arithmetic: interval() creates a time interval, and you can perform arithmetic with intervals and dates/times.
+- Periods: The period class represents a time span in human units, such as "2 days and 5 hours".
+- Date-time arithmetic: You can add or subtract durations, periods, and intervals from date-time objects.
+- Handling leap years, daylight saving time, and time zones: lubridate provides tools to manage these complexities
+```
+- Parsing dates
+date <- ymd("2024-02-19")
+- Extracting components
+year(date)
+month(date)
+day(date)
+- Manipulating dates
+date + months(3)
+- Interval arithmetic
+interval <- interval(ymd("2024-01-01"), ymd("2024-12-31"))
+as.period(interval)
+- Time zone handling
+with_tz(date, "America/New_York")
+```
+****Accessing and changing components*****
+```
+ymd("2017/01/11")
+mdy("January 11, 2017")
+ymd_hms("2017-01-11 01:30:55")
+
+date <- ymd("2017-01-11")
+year(date)
+~ replacing date 
+year(date) <- 1999
+date
+~ day of week
+wday(ymd("2017-01-11"))
+
+~ returns the day of the week (abbreviated) and show the level 
+wday(ymd("2017-01-11"), label = TRUE)
+
+~ returns the day of the week (not abbreviated) and show the level 
+wday(ymd("2017-01-11"), label = TRUE,abbr=F)
+
+~ Extract the day of the week of each flight (as a full name) from time_hour. 
+~ Calculate the average arr_delay by day of the week. 
+~ Plot the results as a column chart (bar chart) with geom_col().
+flights %>% 
+  mutate(weekday=wday(time_hour,label=T,abbr=F)) %>% 
+  group_by(weekday) %>% 
+  drop_na(arr_delay) %>% 
+  summarize(avg_delay=mean(arr_delay)) %>% 
+  ggplot()+
+  geom_col(mapping = aes(x=weekday,y=avg_delay))
+```
