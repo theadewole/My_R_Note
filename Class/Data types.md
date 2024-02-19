@@ -335,3 +335,6 @@ flights %>%
   ggplot()+
   geom_col(mapping = aes(x=weekday,y=avg_delay))
 ```
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/8dc15b9d-0ea3-426c-97e5-6263229c8baf)
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/5a903c0b-af90-41cf-8bcd-a0164a6edd67)
+
