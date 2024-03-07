@@ -17,3 +17,14 @@
 - shape: shape
 
 [chapter2.pdf](https://github.com/theadewole/My_R_Note/files/14449522/chapter2.pdf)
+
+# Geometries
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/ee6c0b99-3558-46c4-a0a9-fc57edadad6c)
+
+#### Shape attribute value 
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/757c3844-d820-424a-b86a-7bd0e8f6642f)
+
+
+
+
+
