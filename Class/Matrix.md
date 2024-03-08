@@ -1,4 +1,12 @@
 # Matrix
+Basic syntax  <br>
+```matrix(data, nrow, ncol, byrow = FALSE, dimnames = NULL)``` <br>
+- data: A vector or a matrix-like object containing the elements to be arranged into a matrix. If data is a vector, it will be filled column-wise into the matrix.
+- nrow: An integer specifying the number of rows in the matrix.
+- ncol: An integer specifying the number of columns in the matrix.
+- byrow: A logical value indicating whether the matrix should be filled by rows (TRUE) or by columns (FALSE). The default is FALSE, meaning the matrix is filled by columns.
+- dimnames: An optional list of length 2, providing names for the rows and columns of the matrix.
+
 ```
 x <- matrix(c(5,0,6,1,3,5,9,5,7,1,5,3),nrow=3,ncol=4, byrow=TRUE,
             dimnames = list(rows=c("r.1", "r.2", "r.3"),
