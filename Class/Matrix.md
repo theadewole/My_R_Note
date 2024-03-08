@@ -11,6 +11,15 @@ Basic syntax  <br>
 x <- matrix(c(5,0,6,1,3,5,9,5,7,1,5,3),nrow=3,ncol=4, byrow=TRUE,
             dimnames = list(rows=c("r.1", "r.2", "r.3"),
                             cols=c("c.1", "c.2", "c.3", "c.4")))
+when byrow=T
+1  2  3  4
+5  6  7  8
+9  10 11 12
+
+when byrow=F
+1 4 7 10
+2 5 8 11
+3 6 9 12
 
 y <- matrix(c("A","B","C","D","E","F","G","H","I","J","K","L"),nrow=3,ncol=4, byrow=TRUE,
             dimnames = list(rows=c("Cat", "Rat", "Dog"),
