@@ -1,6 +1,7 @@
 # Matrix
 Basic syntax  <br>
 ```matrix(data, nrow, ncol, byrow = FALSE, dimnames = NULL)``` <br>
+```matrix(data, nrow, ncol, byrow = FALSE, dimnames = list(rows=c(),cols=c()))```
 - data: A vector or a matrix-like object containing the elements to be arranged into a matrix. If data is a vector, it will be filled column-wise into the matrix.
 - nrow: An integer specifying the number of rows in the matrix.
 - ncol: An integer specifying the number of columns in the matrix.
