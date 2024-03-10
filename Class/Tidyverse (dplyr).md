@@ -1,3 +1,8 @@
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/41a1f833-9e28-4c2b-bdfc-e3404d13d167)
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/839f7b56-526c-4ef8-8a63-794398500a9f)
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/7c1165eb-eebb-4962-aeb8-290b67d3501f)
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/7fe24194-92bf-4a30-bf7c-021a4bf3c0a3)
+<br>
 A collection of modern R packages that share common  philosophies, embed best practices, and are designed to work together <br>
 ``` install.packages("tidyverse")``` <br>
 ```library("tidyverse")``` <br>
