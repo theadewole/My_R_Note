@@ -413,7 +413,31 @@ airports %>%
   distinct(faa)
 ```
 
+## Combination 
+### bind_cols ()
+bind_cols() function is typically used to combine data frames column-wise. This works same as cbind in base r <br>
+```bind_cols(..., .id = NULL)``` <br>
+- ...: Data frames or named columns to combine. You can specify multiple data frames or vectors.
+- .id: Optional argument. If .id is set to a string, it will create a new column with that name to store the name of the data frame each row originated from.
+```
+df1 <- data.frame(A = 1:3, B = letters[1:3])
+df2 <- data.frame(C = 4:6, D = LETTERS[1:3])
 
+# Combine data frames column-wise
+combined_df <- bind_cols(df1, df2)
+```
+### bind_rows
+bind_rows() function is used to combine data frames row-wise. This works same as rbind in base r <br>
+```bind_rows(..., .id = NULL)``` <br>
+- ...: Data frames or named vectors to combine. You can specify multiple data frames or vectors.
+- .id: Optional argument. If .id is set to a string, it will create a new column with that name to store the name of the data frame each row originated from
+```
+df1 <- data.frame(A = 1:3, B = letters[1:3])
+df2 <- data.frame(A = 4:6, B = letters[4:6])
+
+# Combine data frames row-wise
+combined_df <- bind_rows(df1, df2)
+```
 
 
 
