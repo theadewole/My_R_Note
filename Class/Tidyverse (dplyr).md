@@ -496,8 +496,154 @@ df2 <- data.frame(A = 4:6, B = letters[4:6])
 # Combine data frames row-wise
 combined_df <- bind_rows(df1, df2)
 ```
+## Other Functions 
+### rename ()
+The rename() function in dplyr is used to rename columns in a data frame. It allows you to specify new names for one or more columns while keeping the rest of the data frame intact
+```
+# Sample data frame
+data <- data.frame(
+  old_name1 = 1:5,
+  old_name2 = letters[1:5])
+
+# Rename columns using rename()
+renamed_data <- data %>%
+  rename(new_name1 = old_name1,
+         new_name2 = old_name2)
+```
+### transmute ()
+The transmute() function in dplyr is similar to mutate(), but it differs in that it only keeps the newly created variables and discards all other variables in the data frame. It's particularly useful when you want to create new variables and keep only those new variables, discarding the original ones.
+```
+data <- data.frame(
+  ID = 1:5,
+  Age = c(25, 30, 35, 40, 45),
+  Height = c(170, 165, 180, 175, 160)
+)
+
+# Create a new variable using transmute()
+transmuted_data <- data %>%
+  transmute(Age_squared = Age^2,
+            Height_meters = Height / 100)
+```
+### The mutate_all() 
+function in dplyr is used to apply a function to all columns in a data frame. This function is particularly useful when you want to perform a transformation or computation on every column of your data frame <br>
+```mutate_all(.tbl, .funs, ...)``` <br>
+- .tbl: The data frame or tibble to modify.
+- .funs: The function or functions to apply to each column.
+- ...: Additional arguments passed to the function(s).
+```
+data <- data.frame(
+  A = c(1, 2, 3),
+  B = c(4, 5, 6),
+  C = c(7, 8, 9))
+# Apply a transformation to all columns using mutate_all()
+transformed_data <- data %>%
+  mutate_all(~ . * 10)
+
+data <- data.frame(
+  A = c(1, 2, 3),
+  B = c(4, 5, 6),
+  C = c(7, 8, 9),
+  D = c("apple", "banana", "orange"))
+# Apply log transformation to all numeric columns using mutate_all()
+transformed_data <- data %>%
+  mutate_all(~ ifelse(is.numeric(.), log(.), .))
+
+data <- data.frame(
+  A = c(1, 2, 3),
+  B = c(4, 5, 6),
+  C = c(7, 8, 9))
+# Apply scaling to all numeric columns using mutate_all()
+scaled_data <- data %>%
+  mutate_all(~ if(is.numeric(.)) scale(.) else .)
+
+data <- data.frame(
+  A = c("apple", "banana", "orange"),
+  B = c("cat", "dog", "elephant"),
+  C = c("red", "blue", "green"))
+# Convert all character columns to uppercase using mutate_all()
+uppercase_data <- data %>%
+  mutate_all(~ if(is.character(.)) toupper(.) else .)
+```
+
+### mutate_at() 
+function in dplyr is used to apply a function to specific columns in a data frame, identified by their names or positions. This function allows you to target specific columns rather than applying the transformation to all columns <br>
+```mutate_at(.tbl, .vars, .funs, ...)``` <br>
+- .tbl: The data frame or tibble to modify.
+- .vars: A selection of columns to modify. You can specify columns using column names or positions.
+- .funs: The function or functions to apply to the selected columns.
+- ...: Additional arguments passed to the function(s).
+```
+data <- data.frame(
+  A = c(1, 2, 3),
+  B = c(4, 5, 6),
+  C = c(7, 8, 9),
+  D = c(10, 11, 12))
+# Apply a transformation to specific columns using mutate_at()
+transformed_data <- data %>%
+  mutate_at(vars(A, B), ~ . * 10)
+
+data <- data.frame(
+  A = c(1, 2, 3),
+  B = c(4, 5, 6),
+  C = c(7, 8, 9),
+  D = c(10, 11, 12))
+# Apply transformation to specific columns using mutate_at() with column positions
+transformed_data <- data %>%
+  mutate_at(vars(1:2), ~ . * 10)
 
 
+data <- data.frame(
+  A = c(1, 2, 3),
+  B = c(4, 5, 6),
+  C = c(7, 8, 9))
+# Define a custom function to add 5 to a column
+add_five <- function(x) {
+  x + 5
+}
+# Apply the custom function to specific columns using mutate_at()
+transformed_data <- data %>%
+  mutate_at(vars(A, B), add_five)
 
+data <- data.frame(
+  A = c(1, 2, 3),
+  B = c(4, 5, 6),
+  C = c(7, 8, 9))
+# Apply multiple functions to specific columns using mutate_at()
+transformed_data <- data %>%
+  mutate_at(vars(A, B), list(add_five = ~ . + 5, square = ~ .^2))
+```
+### mutate_if() 
+function in dplyr is used to apply a function to columns in a data frame that meet specific conditions based on their properties or values. This function is particularly useful when you want to selectively modify columns based on some criteria. <br>
+```mutate_if(.tbl, .predicate, .funs, ...)``` <br>
+- .tbl: The data frame or tibble to modify.
+- .predicate: A predicate function or logical condition specifying which columns to modify.
+- .funs: The function or functions to apply to the selected columns.
+- ...: Additional arguments passed to the function(s).
+```
+data <- data.frame(
+  A = c(1, 2, 3),
+  B = c(4, 5, 6),
+  C = c(7, 8, 9),
+  D = c(10, 11, 12))
+# Apply a transformation to columns where the mean is greater than 5
+transformed_data <- data %>%
+  mutate_if(~ mean(.) > 5, ~ . * 10)
 
+data <- data.frame(
+  A = c(1, 2, 3),
+  B = c(4, 5, 6),
+  C = c("apple", "banana", "orange"),
+  D = c("cat", "dog", "elephant"))
+# Apply log transformation to numeric columns using mutate_if()
+transformed_data <- data %>%
+  mutate_if(is.numeric, ~ log(.))
 
+data <- data.frame(
+  A = c(1, 2, 3),
+  B = c(4, 5, 6),
+  C = c("apple", "banana", "orange"),
+  D = c("cat", "dog", "elephant"))
+# Apply a transformation only to character columns using mutate_if()
+transformed_data <- data %>%
+  mutate_if(is.character, toupper)
+```
