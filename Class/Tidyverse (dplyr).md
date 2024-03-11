@@ -3,6 +3,64 @@
 ![image](https://github.com/theadewole/My_R_Note/assets/108795960/7c1165eb-eebb-4962-aeb8-290b67d3501f)
 ![image](https://github.com/theadewole/My_R_Note/assets/108795960/7fe24194-92bf-4a30-bf7c-021a4bf3c0a3)
 <br>
+List of some functions in dplyr <br>
+- add_count(): Add a column with counts by group.
+- add_row(): Add rows to a data frame.
+- across(): Apply a function across multiple columns.
+- arrange(): Reorder rows in a data frame based on variable(s).
+- between(): Filter rows where a variable's value falls within a specified range.
+- bind_cols(): Combine data frames by columns.
+- bind_rows(): Combine data frames by rows.
+- case_when(): A vectorized version of if-else statements.contains(): Select columns based on names containing a specific string.
+- count() (or tally()): Count the number of rows in each group.
+- cummax(): Compute cumulative maximums.
+- cummin(): Compute cumulative minimums.
+- cumprod(): Compute cumulative products.
+- cumsum(): Compute cumulative sums.
+- cur_group_id(): Get the current group ID.
+- cur_group_rows(): Get the row indices of the current group.
+- dense_rank(): Rank data within groups densely.
+- distinct(): Remove duplicate rows from a data frame.
+- ends_with(): Select columns based on names ending with a specific string.
+- enframe(): Convert named vectors or lists to a data frame.
+- everything(): Select all variables/columns.
+- expand(): Generate all combinations of values.
+- expand_grid(): Create a data frame from all combinations of inputs.
+- filter(): Select rows/cases from a data frame that meet specified criteria.
+- filter_all(), filter_at(), filter_if(): Apply filtering functions to multiple columns based on different conditions.
+- first(): Extract the first element of a vector.
+- full_seq(): Generate a full sequence of values.
+- group_by(): Group data by one or more variables.
+- if_else(): A vectorized version of if-else statements.
+- inner_join(), left_join(), right_join(), full_join(), semi_join(), anti_join(): Combine data frames based on common variables.
+- join() functions (inner_join(), left_join(), right_join(), full_join(), semi_join(), anti_join()): Combine data frames based on common variables.
+- lag(): Access lagged values within a vector.
+- last(): Extract the last element of a vector.
+- matches(): Select columns based on regular expressions.
+- min_rank(): Rank data within groups by minimum values.\
+- mutate(): Create new variables/columns or modify existing ones.
+- na_if(): Replace specified values with NA.
+- nest(), unnest(): Nest or unnest data frames within a list column.
+- near(): Check if two numeric values are nearly equal.
+- nth(): Extract the nth element from a vector.
+- pivot_longer(), pivot_wider(): Convert data between long and wide formats.
+- pivot_longer_spec(), pivot_wider_spec(): Specify pivot values and names using helper functions.
+- pull(): Extract a single column as a vector.
+- recode(), recode_factor(): Recode values in a vector or factor.
+- relocate(): Reorder variables within a data frame.
+- rename(): Rename columns in a data frame.
+- row_number(): Return the row numbers.
+- rowwise(): Apply functions to each row of a data frame.
+- sample_frac(): Randomly sample rows from a data frame by fraction.
+- sample_n(): Randomly sample rows from a data frame by number.
+- select(): Select columns/variables from a data frame.
+- starts_with(): Select columns based on names starting with a specific string.
+- summarize_all(), summarize_at(), summarize_if(): Apply summarizing functions to multiple columns based on different conditions.
+- summarise() (or summarize()): Generate summary statistics for groups of data.
+- tally(): Count the number of rows in each group.
+- top_n(): Select the top or bottom n rows within each group.
+- transmute(): Perform transformations and return only specified variables.
+- ungroup(): Remove grouping from a data frame. <br>
 A collection of modern R packages that share common  philosophies, embed best practices, and are designed to work together <br>
 ``` install.packages("tidyverse")``` <br>
 ```library("tidyverse")``` <br>
