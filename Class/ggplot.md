@@ -116,7 +116,7 @@ ggplot(mpg, aes(displ, hwy)) +
   geom_point() +
   facet_wrap(vars(cyl, drv), labeller = "label_both")
 ```
-****To change the order in which the panels appear, change the levels of the underlying factor.*****
+****To change the order in which the panels appear, change the levels of the underlying factor.****
 ```
 mpg$class2 <- reorder(mpg$class, mpg$displ)
 ggplot(mpg, aes(displ, hwy)) +
@@ -157,3 +157,56 @@ ggplot(mpg,aes(displ,hwy))+
   geom_point()+
   facet_grid(~class)
 ```
+
+## Plot Geoms
+### Adding smoother to a plot
+```
+ggplot(mpg,aes(displ,hwy))+
+  geom_point()+
+  geom_smooth()
+```
+The smooth() can also take the followig addition argument<br>
+- method.args:
+This argument allows you to pass additional arguments specific to the smoothing method being used. For example, when using method = "loess", you can specify the span parameter to control the degree of smoothing.
+- color, fill, linetype, size:
+These aesthetics can be used to customize the appearance of the smoothed line, such as its color, fill (for confidence intervals), line type, and size.
+- alpha:
+This argument controls the transparency of the smoothed line and confidence intervals. A value of 0 indicates complete transparency (i.e., invisible), while a value of 1 indicates full opacity.
+- linetype:
+This argument specifies the line type of the smoothed curve, such as solid, dashed, dotted, etc.
+- size:
+This argument determines the thickness of the line representing the smoothed curve.
+- mapping:
+This argument allows you to override the default aesthetic mapping specified in the aes() function for the smoothed line.
+
+**applying span**
+```
+ggplot(mpg,aes(displ,hwy))+
+  geom_point()+
+  geom_smooth(span=0.2)
+```
+**applying method** 
+```
+library(mgcv)
+ggplot(mpg,aes(displ,hwy))+
+  geom_point()+
+  geom_smooth(method="gam",formula=y~ s(x))
+```
+****applying method=lm(linear model)****
+```
+ggplot(mpg,aes(displ,hwy))+
+  geom_point()+
+  geom_smooth(method="lm")
+```
+**applying more argument**
+```
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth(method = "loess", 
+              color = "blue", 
+              fill = "lightblue", 
+              linetype = "dashed", 
+              size = 1.5, 
+              alpha = 0.5)
+```
+
