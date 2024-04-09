@@ -213,4 +213,167 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
               size = 1.5, 
               alpha = 0.5)
 ```
+###  Boxplots and Jittered Points
+Useful when data includes a categorical variable and one or more continuous variables, shows how the values of the continuous variables vary with the levels of the categorical variable <br>
+- **geom_jitter** <br>
+adds a little random noise to the data which can help avoid overplotting.
+```
+ggplot(mpg, aes(drv,hwy)) +
+  geom_jitter()
+```
+- **boxplot** <br>
+summarise the shape of the distribution with a handful of summary statistics.
+```
+ggplot(mpg, aes(drv,hwy)) +
+  geom_boxplot()
+```
+- **violin plot** <br>
+show a compact representation of the “density” of the distribution, highlighting the areas where more points are found.
+```
+ggplot(mpg, aes(drv,hwy)) +
+  geom_violin()
+```
+###  Histograms and Frequency Polygons
+Histograms and frequency polygons show the distribution of a single numeric
+variable. They provide more information about the distribution of a single
+group than boxplots do, at the expense of needing more space.<br>
+Both histograms and frequency polygons work in the same way: they bin
+the data, then count the number of observations in each bin. The only difference is the display: histograms use bars and frequency polygons use lines. <br>
+- **histogram** <br>
+```
+ggplot(mpg, aes(hwy)) +
+geom_histogram()
+```
+- **freqpoly** <br>
+```
+ggplot(mpg, aes(hwy)) +
+geom_freqpoly()
+- Controlling the bin 
+ggplot(mpg, aes(hwy)) +
+  geom_freqpoly(binwidth = 1)
+```
+- ****Mapping with categorical data**** <br>
+To compare the distributions of different subgroups, you can map
+a categorical variable to either fill (for geom histogram()) or colour (for
+geom freqpoly()). It’s easier to compare distributions using the frequency
+polygon because the underlying perceptual task is easier. You can also use
+facetting: this makes comparisons a little harder, but it’s easier to see the
+distribution of each group.
+```
+ggplot(mpg, aes(displ, colour = drv)) +
+  geom_freqpoly(binwidth = 0.5)
 
+ggplot(mpg, aes(displ, fill = drv)) +
+  geom_histogram(binwidth = 0.5) +
+  facet_wrap(~drv, ncol = 1)
+  ```
+### Bar Chart 
+The discrete analogue of the histogram is the bar chart<br>
+There two rather different plots
+that are both commonly called bar charts. The one form expects you to
+have unsummarised data, and each observation contributes one unit to the
+height of each bar. The other form of bar chart is used for presummarised
+data.
+- **Summarized data**
+```
+ggplot(mpg, aes(manufacturer)) +
+  geom_bar()
+```
+- **Presummarised**
+```
+drugs <- data.frame(
+  drug = c("a", "b", "c"),
+  effect = c(4.2, 9.7, 6.1))
+ggplot(drugs, aes(drug, effect)) + geom_bar(stat = "identity")
+```
+### Time Series with Line and Path Plots
+Line and path plots are typically used for time series data. 
+- Line plots join the points from left to right
+- Path plots join them in the order that they appear in the dataset (in other words, a line plot is a path plot of the data
+sorted by x value).
+- Line plots usually have time on the x-axis, showing how a single variable has changed over time.
+- Path plots show how two variables have simultaneously changed over time, with time encoded in the way that observations are connected.<br>
+**Line Plot**
+```
+ggplot(economics, aes(date, unemploy / pop)) +
+  geom_line()
+
+ggplot(economics, aes(date, uempmed)) +
+  geom_line()
+```
+**Path Plot**
+```
+ggplot(economics, aes(unemploy / pop, uempmed)) +
+  geom_path() +
+  geom_point()
+
+year <- function(x) as.POSIXlt(x)$year + 1900
+ggplot(economics, aes(unemploy / pop, uempmed)) +
+  geom_path(colour = "grey50") +
+  geom_point(aes(colour = year(date)))
+```
+## Modifying the Axes
+### xlab() and ylab() 
+modify the x- and y-axis labels
+- **Adding the axis labels**
+```
+ggplot(mpg, aes(cty, hwy)) +
+  geom_point(alpha = 1 / 3)
+ 
+ggplot(mpg, aes(cty, hwy)) +
+  geom_point(alpha = 1 / 3) +
+  xlab("city driving (mpg)") +
+  ylab("highway driving (mpg)")
+```
+- **Removing the axis label**
+```
+ggplot(mpg, aes(cty, hwy)) +
+  geom_point(alpha = 1 / 3) +
+  xlab(NULL) +
+  ylab(NULL)
+```
+### xlim() and ylim()
+modify the limits of axes
+```
+ ggplot(mpg, aes(drv, hwy)) +
+  geom_jitter(width = 0.25)
+
+ggplot(mpg, aes(drv, hwy)) +
+  geom_jitter(width = 0.25) +
+  xlim("f", "r") +
+  ylim(20, 30)
+```
+- **For continuous scales, use NA to set only one limit**
+```
+ggplot(mpg, aes(drv, hwy)) +
+  geom_jitter(width = 0.25, na.rm = TRUE) +
+  ylim(NA, 30)
+```
+Changing the axes limits sets values outside the range to NA. You can suppress the associated warning with na.rm = TRUE.
+
+## Output
+- **Rendering to screen**
+```
+p <- ggplot(mpg, aes(displ, hwy, colour = factor(cyl))) +
+  geom_point()
+
+summary(p)
+print (p)
+```
+- **saving to the current work drive** <br>
+```
+ggsave save the latest created plot
+getwd()
+ggsave("plot.png", width = 5, height = 5)
+```
+- **Saving to a directed location**
+```
+ggsave("C:\\Users\\AFSS-Student\\Documents\\R\\Output\\my-plot.pdf", width = 6, height = 6)
+```
+- **Saving to disk** <br>
+Save a cached copy of it to disk, with saveRDS(). This saves a complete
+copy of the plot object, so you can easily re-create it with readRDS().
+```
+saveRDS(p, "plot.rds")
+q <- readRDS("plot.rds")
+```
