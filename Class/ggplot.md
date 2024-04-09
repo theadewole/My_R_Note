@@ -1,3 +1,7 @@
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/0b5f2c7a-4db2-49db-9eee-dd67a2fa3de9)<br>
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/9bde074c-f426-4072-8a43-a37c3ec1d8f6) <br>
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/49d11712-9586-4650-b318-7a7221df7485) <br>
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/7bc182f1-8509-4363-a17b-8ba02d15eb1f) <br>
 # Grammar of Graphics
 ```library(ggplot2)``` <br>
 All plot consist of;
