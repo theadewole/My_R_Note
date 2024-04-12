@@ -5,14 +5,22 @@
 # Grammar of Graphics
 ```library(ggplot2)``` <br>
 All plot consist of;
-- Data: This is the actual information you want to visualize, typically in the form of a data frame or another structured data format. It contains the variables and observations you're interested in representing graphically.
-- Aesthetic mappings: These mappings describe how variables in the data are mapped to visual attributes such as color, size, shape, etc. Aesthetic mappings define how the data will be represented visually in the plot.
-- Geometric objects (geoms): Geoms are the visual elements that represent the data, such as points, lines, bars, polygons, etc. Geoms define what you actually see on the plot and are specified in ggplot2 using functions like geom_point(), geom_line(), etc.
-- Statistical transformations (stats): Stats summarize or transform the data in various ways before visualization. For example, creating histograms, calculating summary statistics, fitting regression lines, etc. Stats are specified within geoms or through separate stat functions.
-- Scales: Scales map values in the data space to visual aesthetics like color, size, shape, etc. They provide legends or axes to interpret the visual mappings and read the original data values from the plot. Scales can be continuous or discrete and are specified using functions like scale_x_continuous(), scale_fill_discrete(), etc.
-- Coordinate system (coord): The coordinate system defines how data coordinates are mapped to the plane of the graphic. It also provides axes and gridlines to aid in interpreting the plot. Common coordinate systems include Cartesian coordinates, polar coordinates, etc.
-- Faceting specification: Faceting breaks up the data into subsets and displays those subsets as small multiples. This allows you to compare different subsets of data more easily. Faceting is specified using functions like facet_wrap() or facet_grid().
-- Theme: The theme controls the overall appearance of the plot, including finer points like font size, background color, gridlines, etc. Themes allow you to customize the visual style of the plot to make it more attractive and informative.
+- **Data** <br>
+This is the actual information you want to visualize, typically in the form of a data frame or another structured data format. It contains the variables and observations you're interested in representing graphically.
+- **Aesthetic mappings** <br>
+These mappings describe how variables in the data are mapped to visual attributes such as color, size, shape, etc. Aesthetic mappings define how the data will be represented visually in the plot.
+- **Geometric objects (geoms)**<br>
+Geoms are the visual elements that represent the data, such as points, lines, bars, polygons, etc. Geoms define what you actually see on the plot and are specified in ggplot2 using functions like geom_point(), geom_line(), etc.
+- **Statistical transformations (stats)** <br>
+Stats summarize or transform the data in various ways before visualization. For example, creating histograms, calculating summary statistics, fitting regression lines, etc. Stats are specified within geoms or through separate stat functions.
+- **Scales**<br>
+Scales map values in the data space to visual aesthetics like color, size, shape, etc. They provide legends or axes to interpret the visual mappings and read the original data values from the plot. Scales can be continuous or discrete and are specified using functions like scale_x_continuous(), scale_fill_discrete(), etc.
+- **Coordinate system (coord)** <br>
+The coordinate system defines how data coordinates are mapped to the plane of the graphic. It also provides axes and gridlines to aid in interpreting the plot. Common coordinate systems include Cartesian coordinates, polar coordinates, etc.
+- **Faceting specification** <br>
+Faceting breaks up the data into subsets and displays those subsets as small multiples. This allows you to compare different subsets of data more easily. Faceting is specified using functions like facet_wrap() or facet_grid().
+- **Theme** <br>
+The theme controls the overall appearance of the plot, including finer points like font size, background color, gridlines, etc. Themes allow you to customize the visual style of the plot to make it more attractive and informative.
 ## Basic
 ```
 - ggplot(mpg,aes(x=displ,y=hwy))+
