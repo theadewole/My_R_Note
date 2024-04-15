@@ -302,3 +302,105 @@ ggsave("C:\\Users\\AFSS-Student\\Documents\\R\\Output\\my-plot.pdf", width = 6, 
 #Saving to disk 
 saveRDS(p, "plot.rds")
 q <- readRDS("plot.rds")
+
+
+################################ CHAPTER 3######################################
+
+######################################################
+#Basic Plot types
+######################################################
+df <- data.frame(
+  x = c(3, 1, 5),
+  y = c(2, 4, 6),
+  label = c("a","b","c"))
+
+#Assigning the plot to an object
+p <- ggplot(df, aes(x, y, label = label)) +
+  labs(x = NULL, y = NULL) + # Hide axis label
+  theme(plot.title = element_text(size = 12)) # Shrink plot title
+
+#Adding Scatterplot
+p + geom_point() + ggtitle("point")
+
+#Adding text on inside each corresponding point of the plot
+p + geom_text() + ggtitle("text")
+
+#Adding Stacked bar
+p + geom_bar(stat = "identity") + ggtitle("bar")
+
+#Adding tiles
+p + geom_tile() + ggtitle("raster")
+
+#Adding line
+p + geom_line() + ggtitle("line")
+
+#Adding area plot
+p + geom_area() + ggtitle("area")
+
+#Adding Path plot
+p + geom_path() + ggtitle("path")
+
+#Adding polygon plot
+p + geom_polygon() + ggtitle("polygon")+
+
+
+###########################################
+#Labels
+###########################################
+df <- data.frame(x = 1, y = 3:1, 
+      family = c("sans", "serif", "arial"))
+
+##################################
+#Applying font family
+##################################
+ggplot(df, aes(x, y)) +
+  geom_text(aes(label = family, family = family))
+
+###################
+##Applying a single font type to the entire plot 
+###################
+#loading the extrafont package
+#install.packages('extrafont')
+library(extrafont)
+
+#Show entire table
+fonttable()
+
+#To load the installed font into the current working session
+loadfonts()
+
+#Check names of all available fonts 
+fonts()
+#########Using#########
+install.packages("showtext")
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+##The first part is the font name while the second is the given name
+font_add_google("Gochi Hand", "gochi")
+font_add_google("Schoolbell", "bell")
+font_add_google("Covered By Your Grace", "grace")
+font_add_google("Rock Salt", "rock")
+
+## Automatically use showtext to render text for future devices
+showtext_auto()
+
+#using extratext option 
+ggplot(df, aes(x, y)) +
+  geom_text(aes(label = family, family = "Castellar"))
+
+#using showtext option 
+ggplot(df, aes(x, y)) +
+  geom_text(aes(label = family, family = "gochi"))
+
+##################################
+#Applying font face (default "plain","bold","italic")
+##################################
+df <- data.frame(x = 1, y = 3:1, 
+      face = c("plain", "bold", "italic"))
+
+ggplot(df, aes(x, y)) +
+  geom_text(aes(label = face, fontface = face))
+
+#Applying to all the same to all values 
+ggplot(df, aes(x, y)) +
+  geom_text(aes(label = face, fontface = "bold"))
