@@ -523,6 +523,88 @@ ggplot(mpg, aes(displ, hwy, colour = class)) +
   geom_point(show.legend = FALSE) +
   directlabels::geom_dl(aes(label = class), method = "smart.grid")
 
+#########################################
+# Annotations
+##geom text() to add text descriptions or to label points Most plots will not benefit from 
+#adding text to every single observation on the plot, but labelling outliers and other important 
+#points is very useful.
+
+##geom rect() to highlight interesting rectangular regions of the plot. geom rect() has 
+#aesthetics xmin, xmax, ymin and ymax.
+
+##geom line(), geom path() and geom segment() to add lines. All these geoms have an arrow parameter, 
+#which allows you to place an arrowhead on the line. Create arrowheads with arrow(), 
+#which has arguments angle, length, ends and type.
+
+##geom vline(), geom hline() and geom abline() allow you to add reference lines 
+#(sometimes called rules), that span the full range of the plot.
+#########################################
+ggplot(economics, aes(date, unemploy)) +
+  geom_line()
+
+#Annotating the above to the president in power
+eco <- economics
+pre <-presidential
+presidential <- subset(presidential, start > economics$date[1])
+
+#geom_rect
+data <- data.frame(
+  x = c(1, 3),
+  y = c(2, 4),
+  label = c("Rectangle 1", "Rectangle 2"))
+
+ggplot() +
+  geom_rect(
+    aes(xmin = x - 0.5, xmax = x + 0.5, ymin = y - 0.5, ymax = y + 0.5),
+    fill = "lightblue", color = "blue", alpha = 0.5,
+    data = data) +
+  geom_text(aes(x = x, y = y, label = label),
+            data = data,
+            vjust = 0.5 ) +
+  xlim(0, 5) +
+  ylim(0, 5) +
+  labs(title = "Using geom_rect() in ggplot2",x = "X-axis",y = "Y-axis")
+
+#geom_vline and hline application
+data <- data.frame(
+  x = 1:10,
+  y = rnorm(10))
+
+# Calculate the median of y
+median_y <- median(data$y)
+mean_x <- mean(data$x)
+
+# Plot
+ggplot(data, aes(x = x, y = y)) +
+  geom_point() +  # Adding some points for context
+  geom_vline(xintercept = median_y, color = "red", linetype = "dashed") + 
+  geom_hline(yintercept = mean_x, color = "blue", linetype = "dashed") +
+  geom_text(aes(x = median_y, y = mean_x, 
+                label = paste("(", round(median_y, 2), ",", round(mean_x, 2), ")")),
+            color = "black", vjust = "inward", hjust = "inward") +
+  labs(title = "Using geom_vline() and hline in ggplot2",x = "X-axis",y = "Y-axis")
+
+
+ggplot(economics) +
+  geom_rect(
+    aes(xmin = start, xmax = end, fill = party),
+    ymin = -Inf, ymax = Inf, alpha = 0.2,
+    data = presidential
+  ) +
+  geom_vline(
+    aes(xintercept = as.numeric(start)),
+    data = presidential,
+    colour = "grey50", alpha = 0.5
+  ) +
+  geom_text(
+    aes(x = start, y = 2500, label = name),
+    data = presidential,
+    size = 3, vjust = 0, hjust = 0, nudge_x = 50
+  ) +
+  geom_line(aes(date, unemploy)) +
+  scale_fill_manual(values = c("blue", "red"))
+
+
 
 
 
