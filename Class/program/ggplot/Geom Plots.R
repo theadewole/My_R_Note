@@ -194,6 +194,7 @@ ggplot(data, aes(x, y)) +
 
 ################################################################################
 #Collective Geoms
+#page 46 of the ggplot Elegant Graphics
 ################################################################################
 data(Oxboys, package = "nlme")
 head(Oxboys)
@@ -219,3 +220,74 @@ ggplot(Oxboys, aes(age, height)) +
 ggplot(Oxboys, aes(age, height, group =interaction(school_id, student_id))) +
   geom_point() +
   geom_line()
+
+##########################################
+#Different Groups on Different Layers
+##########################################
+#Adding a smooth line on the previous to all boys 
+ggplot(Oxboys, aes(age, height, group = Subject)) +
+  geom_line() +
+  geom_smooth(method = "lm", se = FALSE)
+
+#instead of putting the group in ggplot we put it in the line plot to apply to the line plot alone
+ggplot(Oxboys, aes(age, height)) +
+  geom_line(aes(group = Subject)) +
+  geom_smooth(method = "lm", size = 2, se = FALSE)
+
+#####################################
+# Overriding the Default Grouping
+#####################################
+ggplot(Oxboys, aes(Occasion, height)) +
+  geom_boxplot()
+
+ggplot(Oxboys, aes(Occasion, height)) +
+  geom_boxplot() +
+  geom_line(colour = "#3366FF", alpha = 0.5)
+
+ggplot(Oxboys, aes(Occasion, height)) +
+  geom_boxplot() +
+  geom_line(aes(group = Subject), colour = "#3366FF", alpha = 0.5)
+
+
+###########################################
+# Matching Aesthetics to Graphic Objects
+###########################################
+df <- data.frame(x = 1:3, y = 1:3, colour = c(1,3,5))
+
+ggplot(df, aes(x, y, colour = factor(colour))) +
+  geom_line(aes(group = 1), size = 2) +
+  geom_point(size = 5)
+
+ggplot(df, aes(x, y, colour = colour)) +
+  geom_line(aes(group = 1), size = 2) +
+  geom_point(size = 5)
+
+xgrid <- with(df, seq(min(x), max(x), length = 50))
+interp <- data.frame(
+  x = xgrid,
+  y = approx(df$x, df$y, xout = xgrid)$y,
+  colour = approx(df$x, df$colour, xout = xgrid)$y)
+
+
+ggplot(interp, aes(x, y, colour = colour)) +
+  geom_line(size = 2) +
+  geom_point(data = df, size = 5)
+
+
+################################################################################
+# Surface Plots
+################################################################################
+#contour plot
+ggplot(faithfuld, aes(eruptions, waiting)) +
+  geom_contour(aes(z = density, colour = ..level..))
+
+#Raster Plot 
+ggplot(faithfuld, aes(eruptions, waiting)) +
+  geom_raster(aes(fill = density))
+
+#Bubble plot
+small <- faithfuld[seq(1, nrow(faithfuld), by = 10), ]
+ggplot(small, aes(eruptions, waiting)) +
+  geom_point(aes(size = density), alpha = 1/3) +
+  scale_size_area()
+
