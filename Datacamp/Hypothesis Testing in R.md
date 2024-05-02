@@ -28,6 +28,9 @@ The null hypothesis is like the current champion, and the alternative hypothesis
 </details>
 
 # Proportion Tests
+**Hypothesis testing workflow** <br>
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/b0c811ee-5739-4d4d-bdc4-466d0d718a8f)
+
 <details><summary>PDF</summary>
   
 [chapter3.pdf](https://github.com/theadewole/My_R_Note/files/15186318/chapter3.pdf)
