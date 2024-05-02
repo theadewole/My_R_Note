@@ -5,6 +5,16 @@
 
 </details>
 
+**Definitions** <br>
+- A hypothesis is a statement about an unknown population parameter.
+- A hypothesis test is a test of two competing hypotheses. 
+  - The null hypothesis (H ) is the existing "champion" idea.
+      - The alternative hypothesis (H ) is the new "challenger" idea of the researcher. <br>
+      
+The null hypothesis is like the current champion, and the alternative hypothesis is like a challenger trying to overthrow that champion. Here, the null hypothesis is that our data won't tell us anything new, The alternative hypothesis is that our hunch is correct.
+
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/4cd054b9-9a98-41bf-b54e-8fc8e1be5522)
+
 
 # Two-Sample and ANOVA Tests
 <details><summary>PDF</summary>
