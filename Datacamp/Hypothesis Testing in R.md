@@ -27,6 +27,34 @@ The null hypothesis is like the current champion, and the alternative hypothesis
 
 </details>
 
+**Testing differences between two means using t.test()** <br>
+```
+t.test(
+# Vector of differences
+sample_data$diff,
+# Choose between "two.sided","less","greater"alternative = "less",
+# Null hypothesis population parameter
+mu = 0
+)
+```
+**t.test() with paired = TRUE**
+```
+t.test(sample_data$repub_percent_08,sample_data$repub_percent_12,alternative = "less",
+mu = 0,
+paired = TRUE
+)
+```
+**Unpaired t.test()**
+```
+t.test(
+x = sample_data$repub_percent_08,
+y = sample_data$repub_percent_12,
+alternative = "less",
+mu = 0
+)
+```
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/e15ace4d-ad56-42bf-a386-e1c2ab4013ca)
+
 # Proportion Tests
 **Hypothesis testing workflow** <br>
 ![image](https://github.com/theadewole/My_R_Note/assets/108795960/b0c811ee-5739-4d4d-bdc4-466d0d718a8f)
