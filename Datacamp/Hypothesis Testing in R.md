@@ -127,5 +127,14 @@ The one-sample chi-square test is called a goodness of fit test. To run it, we n
 ****hypothesize()**** <br>
 ![image](https://github.com/theadewole/My_R_Note/assets/108795960/91e52d49-155f-4751-9f7a-24a115c9994f)
 
+****generate()**** <br>
+generate performs the simulation step many times. Each simulated dataset is called a replicate and represents an example of what we might expect the two columns to look like in a universe where the null hypothesis is true
+- To call generate, tell it how many replicates you want. For independence tests, the generation type should always be "permute". For convenience, generate combines all the simulated datasets into a single tibble
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/4386501f-d27c-4e75-9dc8-aacf9e702439)
 
- 
+****calculate()****
+- To use the difference in proportions as the test statistic, set the stat argument to "diff in props". We need to tell calculate which proportion to subtract from which by setting the order.
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/713a7e0e-ac0c-46e4-b9fa-6acf3ffacb1c)
+
+****Get the p-value**** <br>
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/eb71c12b-fa25-46df-9c89-1491372b6302)
