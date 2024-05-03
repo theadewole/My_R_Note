@@ -55,6 +55,30 @@ mu = 0
 ```
 ![image](https://github.com/theadewole/My_R_Note/assets/108795960/e15ace4d-ad56-42bf-a386-e1c2ab4013ca)
 
+**Analysis of variance (ANOVA)** <br>
+You call lm, specifying the numeric variable as the response on the left-hand-side of the formula, and the categories as the explanatory variable on the right-hand side. Then you call anova to perform an analysis of variance test. 
+```
+calling_lm <- lm(numeric_var~categorical_var,data=dataframe)
+
+anova(calling_lm)
+```
+**pairwise test()** <br>
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/25ebe7c7-d4eb-4018-8db2-1de25e1d8d34)
+To run all these hypothesis tests in one go, you can use pairwise-dot-t-dot-test. The first argument is the numeric variable whose sample means you are interested in. The second argument is the categorical variable defining the groups. 
+```
+pairwise.t.test(df$numeric_var~df$categorical,p.adjusted.method="none")
+```
+more methods for p.adjusted.method includes: <br>
+"holm" "hochberg" "hommel" "bonferroni" "BH" "BY" "fdr" "none" <br>
+- Holm: The Holm method is a step-down procedure that adjusts the p-values by controlling the family-wise error rate (FWER). It sequentially compares the smallest adjusted p-value with a threshold based on the Bonferroni correction.
+- Hochberg: Similar to Holm's method, the Hochberg method also controls the FWER. However, instead of using the smallest adjusted p-value, it uses a sequential approach based on ranking the p-values.
+- Hommel: The Hommel method is another step-down procedure for adjusting p-values while controlling the FWER. It is more powerful than Holm's method and can be particularly useful when the tests are dependent.
+- Bonferroni: The Bonferroni method is one of the simplest approaches for controlling the family-wise error rate. It adjusts each individual p-value by dividing the significance level (usually 0.05) by the number of tests.
+- BH (Benjamini-Hochberg): The Benjamini-Hochberg method controls the false discovery rate (FDR), which is the expected proportion of false discoveries among all rejected hypotheses. It is less conservative than methods controlling the FWER and often more powerful in detecting true positives.
+BY (Benjamini-Yekutieli): The Benjamini-Yekutieli method is a variant of the Benjamini-Hochberg method. It is suitable when the tests are dependent or when the dependency structure is unknown.
+- FDR (False Discovery Rate): This method controls the FDR, similar to the BH method. It adjusts the p-values to limit the expected proportion of false positives among all rejected hypotheses.
+- None: Choosing "none" means that no adjustment is applied to the p-values. This is not recommended when performing multiple hypothesis tests because it can lead to an inflated Type I error rate.
+
 # Proportion Tests
 **Hypothesis testing workflow** <br>
 ![image](https://github.com/theadewole/My_R_Note/assets/108795960/b0c811ee-5739-4d4d-bdc4-466d0d718a8f)
