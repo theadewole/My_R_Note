@@ -102,6 +102,9 @@ using infer's chisq-underscore-test.
 Pipe from the sample dataset, passing a formula with the response variable on the left and the explanatory variable on the right.
 ![image](https://github.com/theadewole/My_R_Note/assets/108795960/2eb93846-f3e4-4ba6-8644-69f47d798a68)
 
+## Chi-square goodness of fit tests
+The one-sample chi-square test is called a goodness of fit test. To run it, we need the hypothesized proportions in vector form rather than in a tibble. Again we use chisq_test from infer. However, this time the arguments are different. Piping from the dataset, we set response to the name of the column of interest, and set p to the hypothesized distribution.
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/47f4ddf4-faaa-4c4a-9d5f-e5c65ef4382a)
 
 # Non-Parametric Tests
 <details><summary>PDF</summary>
