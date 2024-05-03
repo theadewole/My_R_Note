@@ -89,6 +89,10 @@ BY (Benjamini-Yekutieli): The Benjamini-Yekutieli method is a variant of the Ben
 
 </details>
 
+## Two-sample proportion tests
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/a4a15045-685c-4474-96f4-a14aaeb83bb1)
+
+
 # Non-Parametric Tests
 <details><summary>PDF</summary>
   
