@@ -21,11 +21,16 @@ The null hypothesis is like the current champion, and the alternative hypothesis
 ![image](https://github.com/theadewole/My_R_Note/assets/108795960/aa703a6c-2f9d-4820-b222-15b629f6ea56)
 
 # Two-Sample and ANOVA Tests
+
 <details><summary>PDF</summary>
   
 [chapter2.pdf](https://github.com/theadewole/My_R_Note/files/15186317/chapter2.pdf)
 
 </details>
+
+**Hypothesis testing workflow** <br>
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/b0c811ee-5739-4d4d-bdc4-466d0d718a8f)
+
 
 **Testing differences between two means using t.test()** <br>
 ```
@@ -80,8 +85,6 @@ BY (Benjamini-Yekutieli): The Benjamini-Yekutieli method is a variant of the Ben
 - None: Choosing "none" means that no adjustment is applied to the p-values. This is not recommended when performing multiple hypothesis tests because it can lead to an inflated Type I error rate.
 
 # Proportion Tests
-**Hypothesis testing workflow** <br>
-![image](https://github.com/theadewole/My_R_Note/assets/108795960/b0c811ee-5739-4d4d-bdc4-466d0d718a8f)
 
 <details><summary>PDF</summary>
   
@@ -91,6 +94,13 @@ BY (Benjamini-Yekutieli): The Benjamini-Yekutieli method is a variant of the Ben
 
 ## Two-sample proportion tests
 ![image](https://github.com/theadewole/My_R_Note/assets/108795960/a4a15045-685c-4474-96f4-a14aaeb83bb1)
+
+## Chi-square test of independence
+Just as ANOVA extends t-tests to more than two groups, chi-square tests of independence extend proportion tests to more than two groups. <br>
+The hypothesis test for independence is called a chi-square independence test, its a right tailed test. 
+using infer's chisq-underscore-test. 
+Pipe from the sample dataset, passing a formula with the response variable on the left and the explanatory variable on the right.
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/2eb93846-f3e4-4ba6-8644-69f47d798a68)
 
 
 # Non-Parametric Tests
