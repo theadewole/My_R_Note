@@ -113,3 +113,16 @@ The one-sample chi-square test is called a goodness of fit test. To run it, we n
 [chapter4.pdf](https://github.com/theadewole/My_R_Note/files/15186319/chapter4.pdf)
 
 </details>
+
+## Assumptions in hypothesis testing
+
+## The "There is only one test" framework
+****A grammar of hypothesis tests**** <br>
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/4649a2a2-6b40-487a-98b2-ad9b69b5edc9)
+****specify ()**** <br>
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/c80a8f83-7cd3-49ca-a4b9-ade510d28e18)
+****hypothesize()**** <br>
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/91e52d49-155f-4751-9f7a-24a115c9994f)
+
+
+ 
