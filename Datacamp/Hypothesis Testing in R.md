@@ -138,3 +138,17 @@ generate performs the simulation step many times. Each simulated dataset is call
 
 ****Get the p-value**** <br>
 ![image](https://github.com/theadewole/My_R_Note/assets/108795960/eb71c12b-fa25-46df-9c89-1491372b6302)
+
+## Non-parametric ANOVA and unpaired t-tests
+A non-parametric test is a hypothesis test that doesn't assume a probability distribution for the test statistic. <br>
+There are two types of non-parametric hypothesis test: <br>
+- Simulation-based.
+- Rank-based 
+****Wilcoxon-Mann-Whitney test**** <br>
+Wilcoxon-Mann-Whitney test using wilcox-dot-test from base-R. It accepts a formula and data argument, though these are swapped compared to the infer functions, so they are less pipe-friendly. <br>
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/622472af-63f4-4214-9357-63b119a6af7e)
+
+****Kruskal-Wallis test**** <br>
+In the same way that ANOVA extends t-tests to more than two groups, the Kruskal-Wallace test extends the Wilcoxon-Mann-Whitney to more than two groups. That is, the Kruskal-Wallace test is a non-parametric version of ANOVA. <br>
+![image](https://github.com/theadewole/My_R_Note/assets/108795960/83af42b5-5afd-44b4-bc94-8861c7d42bbb)
+
